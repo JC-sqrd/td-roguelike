@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://cdilib0ifiu2c"]
 
 [ext_resource type="Script" uid="uid://dngu0yfuhe1jn" path="res://Scripts/Grid/Tile.gd" id="1_rvq8p"]
-[ext_resource type="Texture2D" uid="uid://cf3ndislf6ckn" path="res://icon.svg" id="1_xsjyq"]
+[ext_resource type="Texture2D" uid="uid://mew3rwhsktgm" path="res://Placeholders/Sprites/TilePlaceholder.png" id="2_wnr2v"]
 
 [node name="Tile" type="Node2D" unique_id=1607559896 node_paths=PackedStringArray("tile_sprite")]
 script = ExtResource("1_rvq8p")
 tile_sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=217601597]
-texture = ExtResource("1_xsjyq")
+texture = ExtResource("2_wnr2v")
