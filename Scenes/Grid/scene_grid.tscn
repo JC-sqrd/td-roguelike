@@ -1,0 +1,26 @@
+[gd_scene format=4 uid="uid://b5pywi3rd23mo"]
+
+[ext_resource type="Texture2D" uid="uid://mew3rwhsktgm" path="res://Placeholders/Sprites/TilePlaceholder.png" id="1_4y8t7"]
+[ext_resource type="Script" uid="uid://chv0rfykferao" path="res://Scripts/Grid/Grid.gd" id="2_t54q8"]
+[ext_resource type="Script" uid="uid://ckqedd1yodi83" path="res://Scripts/Grid/GridController.gd" id="3_t54q8"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gtanh"]
+texture = ExtResource("1_4y8t7")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_ttgh6"]
+tile_size = Vector2i(128, 128)
+custom_data_layer_0/name = ""
+custom_data_layer_0/type = 0
+sources/1 = SubResource("TileSetAtlasSource_gtanh")
+
+[node name="Grid" type="TileMapLayer" unique_id=703322131 node_paths=PackedStringArray("grid_controller")]
+tile_map_data = PackedByteArray("AAABAAEAAQAAAAAAAAACAAEAAQAAAAAAAAADAAEAAQAAAAAAAAABAAIAAQAAAAAAAAACAAIAAQAAAAAAAAADAAIAAQAAAAAAAAABAAMAAQAAAAAAAAACAAMAAQAAAAAAAAADAAMAAQAAAAAAAAA=")
+tile_set = SubResource("TileSet_ttgh6")
+script = ExtResource("2_t54q8")
+grid_controller = NodePath("GridController")
+
+[node name="GridController" type="Node" parent="." unique_id=2059947456]
+script = ExtResource("3_t54q8")
+metadata/_custom_type_script = "uid://ckqedd1yodi83"

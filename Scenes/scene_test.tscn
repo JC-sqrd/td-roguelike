@@ -1,25 +1,11 @@
 [gd_scene format=4 uid="uid://c6cogo4la7odr"]
 
-[ext_resource type="Texture2D" uid="uid://mew3rwhsktgm" path="res://Placeholders/Sprites/TilePlaceholder.png" id="1_3q13h"]
-[ext_resource type="Script" uid="uid://chv0rfykferao" path="res://Scripts/Grid/Grid.gd" id="2_gtanh"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gtanh"]
-texture = ExtResource("1_3q13h")
-texture_region_size = Vector2i(128, 128)
-0:0/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_ttgh6"]
-tile_size = Vector2i(128, 128)
-custom_data_layer_0/name = ""
-custom_data_layer_0/type = 0
-sources/1 = SubResource("TileSetAtlasSource_gtanh")
+[ext_resource type="PackedScene" uid="uid://b5pywi3rd23mo" path="res://Scenes/Grid/scene_grid.tscn" id="1_3q13h"]
 
 [node name="Node2D" type="Node2D" unique_id=2030252221]
 
-[node name="Grid" type="TileMapLayer" parent="." unique_id=1691991230]
-tile_map_data = PackedByteArray("AAABAAEAAQAAAAAAAAACAAEAAQAAAAAAAAADAAEAAQAAAAAAAAABAAIAAQAAAAAAAAACAAIAAQAAAAAAAAADAAIAAQAAAAAAAAABAAMAAQAAAAAAAAACAAMAAQAAAAAAAAADAAMAAQAAAAAAAAA=")
-tile_set = SubResource("TileSet_ttgh6")
-script = ExtResource("2_gtanh")
+[node name="Grid" parent="." unique_id=703322131 instance=ExtResource("1_3q13h")]
+tile_map_data = PackedByteArray("AAABAAEAAQAAAAAAAAACAAEAAQAAAAAAAAADAAEAAQAAAAAAAAADAAIAAQAAAAAAAAACAAIAAQAAAAAAAAABAAIAAQAAAAAAAAABAAMAAQAAAAAAAAACAAMAAQAAAAAAAAADAAMAAQAAAAAAAAAEAAMAAQAAAAAAAAAEAAIAAQAAAAAAAAAEAAEAAQAAAAAAAAA=")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=932100681]
 position = Vector2(579, 322)

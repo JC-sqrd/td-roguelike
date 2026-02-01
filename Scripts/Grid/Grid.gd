@@ -1,24 +1,19 @@
 class_name Grid extends TileMapLayer
 
-@export var grid_x_size : int = 10
-@export var grid_y_size : int = 10
+@export var grid_controller : GridController
 
-#var grid : Array[Array]
-@export var grid_data : GridData
-
+var grid_data : GridData
 
 const tile_size : int = 128
 
-const TILE = preload("uid://cdilib0ifiu2c")
-const UNIT_TEST = preload("uid://wk226ka6adsl")
-
-
 func _ready() -> void:
-	print(get_used_cells())
-	print(get_used_rect().position)
-	generate_model_from_tile_map(self)
+	grid_data = generate_model_from_tile_map(self)
+	
+	if grid_controller != null:
+		grid_controller.initialize(grid_data, self)
+		pass
+	
 	pass
-
 
 func generate_model_from_tile_map(tile_map_layer : TileMapLayer) -> GridData:
 	var used_rect : Rect2i = tile_map_layer.get_used_rect()
@@ -26,17 +21,23 @@ func generate_model_from_tile_map(tile_map_layer : TileMapLayer) -> GridData:
 	
 	var grid_data : GridData = GridData.new()
 
+	grid_data.grid_rect = used_rect
+	grid_data.tile_size = tile_size
+	
 	var grid : Array[TileModel] = []
 	grid.resize(used_rect.size.x * used_rect.size.y)
 	
 	
 	for x in range(used_rect.size.x):
 		for y in range(used_rect.size.y):
-			var tile_data : TileData = tile_map_layer.get_cell_tile_data(Vector2i(x + used_rect.position.x,y + used_rect.position.y))
+			var coords : Vector2i = Vector2i(x + used_rect.position.x,y + used_rect.position.y)
+			var tile_data : TileData = tile_map_layer.get_cell_tile_data(coords)
+			var tile_global_pos : Vector2 = tile_map_layer.map_to_local(coords)
 			
 			if tile_data:
 				var tile_model : TileModel = TileModel.new()
 				tile_model.tile_data = tile_data
+				tile_model.tile_global_pos = tile_global_pos
 				grid[x + (y * used_rect.size.x)] = tile_model
 			else:
 				grid[x + (y * used_rect.size.x)] = null
