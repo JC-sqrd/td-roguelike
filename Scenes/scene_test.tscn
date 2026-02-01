@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://c6cogo4la7odr"]
+
+[ext_resource type="Script" uid="uid://chv0rfykferao" path="res://Scripts/Grid/Grid.gd" id="1_3q13h"]
+
+[node name="Node2D" type="Node2D" unique_id=2030252221]
+
+[node name="Grid" type="Node2D" parent="." unique_id=1881426316]
+script = ExtResource("1_3q13h")
+grid_y_size = 5
+metadata/_custom_type_script = "uid://chv0rfykferao"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=932100681]
+position = Vector2(579, 322)
