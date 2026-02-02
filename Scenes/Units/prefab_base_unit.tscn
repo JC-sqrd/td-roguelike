@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://wk226ka6adsl"]
+
+[ext_resource type="Script" uid="uid://cgweddqijr87x" path="res://Scripts/Unit/Unit2D.gd" id="1_geiwp"]
+[ext_resource type="Resource" uid="uid://bfi7psdyj32ew" path="res://Resources/UnitData/data_test_unit.tres" id="2_j3cu2"]
+[ext_resource type="Texture2D" uid="uid://bmfa1k5yfxtqe" path="res://Placeholders/Sprites/Enemy_Front.png" id="3_58nij"]
+
+[node name="PrefabBaseUnit" type="Area2D" unique_id=1989289329 node_paths=PackedStringArray("unit_sprite")]
+script = ExtResource("1_geiwp")
+unit_data = ExtResource("2_j3cu2")
+unit_sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=43116825]
+position = Vector2(0, -64)
+texture = ExtResource("3_58nij")
+
+[node name="RayCast2D" type="RayCast2D" parent="Sprite2D" unique_id=1931951332]
+target_position = Vector2(256, 0)

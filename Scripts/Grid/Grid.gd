@@ -4,15 +4,18 @@ class_name Grid extends TileMapLayer
 
 var grid_data : GridData
 
-const tile_size : int = 128
+const tile_size : int = GameManager.GLOBAL_TILE_SIZE
 
 func _ready() -> void:
+	
+	pass
+
+func initialize():
 	grid_data = generate_model_from_tile_map(self)
 	
 	if grid_controller != null:
 		grid_controller.initialize(grid_data, self)
 		pass
-	
 	pass
 
 func generate_model_from_tile_map(tile_map_layer : TileMapLayer) -> GridData:

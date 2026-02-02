@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Stats" format=3 uid="uid://d3r2ucqmlvmci"]
+
+[ext_resource type="Script" uid="uid://cdquhx3qorgp1" path="res://Scripts/Stat/Stats.gd" id="1_dj1c7"]
+[ext_resource type="Script" uid="uid://cbxu2cfwgpjwg" path="res://Scripts/Stat/StatTemplate.gd" id="2_v0y2n"]
+
+[sub_resource type="Resource" id="Resource_v0y2n"]
+script = ExtResource("2_v0y2n")
+stat_id = &"max_health"
+value = 100.0
+bonus_value = 25.0
+metadata/_custom_type_script = "uid://cbxu2cfwgpjwg"
+
+[sub_resource type="Resource" id="Resource_edbuk"]
+script = ExtResource("2_v0y2n")
+stat_id = &"current_health"
+value = 100.0
+metadata/_custom_type_script = "uid://cbxu2cfwgpjwg"
+
+[resource]
+script = ExtResource("1_dj1c7")
+stat_templates = Array[ExtResource("2_v0y2n")]([SubResource("Resource_v0y2n"), SubResource("Resource_edbuk")])
+metadata/_custom_type_script = "uid://cdquhx3qorgp1"
