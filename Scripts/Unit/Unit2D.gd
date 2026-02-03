@@ -19,7 +19,15 @@ func _ready() -> void:
 	#Initialize health manager
 	health_manager = HealthManager.new(_stats.get_stat("max_health"), _stats.get_stat("current_health"))
 	
-	print("Unit current health: " + str(health_manager.current_health.get_derived_value()))
+	var effect_listener : EffectListener = EffectListener.new(_stats)
+	
+	
+	var damage_effect : InstantEffect = InstantEffect.new()
+	var damage_modifier : FlatStatModifier = FlatStatModifier.new("current_health",50, FlatStatModifier.Mode.SUBTRACT)
+	
+	damage_effect.add_modifier(damage_modifier)
+	
+	effect_listener.receive_effect(damage_effect)
 	pass
 
 

@@ -7,7 +7,7 @@ var current_health : Stat
 func _init(max_health : Stat, current_health : Stat):
 	self.max_health = max_health
 	self.current_health = current_health
-	self.current_health.set_value(max_health.get_derived_value())
+	self.current_health.set_value(max_health.get_value())
 	pass
 
 signal health_depleted()

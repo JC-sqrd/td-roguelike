@@ -16,6 +16,9 @@ func build_stat_templates():
 		pass
 	pass
 
+func has(stat_id : StringName) -> bool:
+	return stats.has(stat_id)
+
 func get_stat(stat_id : StringName) -> Stat:
 	if stats.has(stat_id):
 		return stats[stat_id]

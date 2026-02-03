@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="FlatStatModifier" format=3 uid="uid://b3xglgn2xps86"]
+
+[ext_resource type="Script" uid="uid://bvlmo7eyi5nvi" path="res://Scripts/ContextTag/ContextTag.gd" id="1_f8dj3"]
+[ext_resource type="Script" uid="uid://bf5mxoqvu0t3l" path="res://Scripts/StatModifiers/FlatStatModifier.gd" id="2_3ofis"]
+
+[resource]
+script = ExtResource("2_3ofis")
+stat_id = &"current_health"
+metadata/_custom_type_script = "uid://dm577y4atflkt"
