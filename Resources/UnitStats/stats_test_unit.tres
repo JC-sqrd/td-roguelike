@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="Stats" format=3 uid="uid://d3r2ucqmlvmci"]
+[gd_resource type="Resource" script_class="StatsTemplate" format=3 uid="uid://d3r2ucqmlvmci"]
 
-[ext_resource type="Script" uid="uid://cdquhx3qorgp1" path="res://Scripts/Stat/Stats.gd" id="1_dj1c7"]
+[ext_resource type="Script" uid="uid://cdquhx3qorgp1" path="res://Scripts/Stat/StatsTemplate.gd" id="1_dj1c7"]
 [ext_resource type="Script" uid="uid://cbxu2cfwgpjwg" path="res://Scripts/Stat/StatTemplate.gd" id="2_v0y2n"]
 
 [sub_resource type="Resource" id="Resource_v0y2n"]

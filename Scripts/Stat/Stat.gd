@@ -1,11 +1,15 @@
 class_name Stat extends RefCounted
 
+
+#NOTE: Careful on referencing other RefCounted objects, make sure to use weakref() to prevent cyclic dependencies
 var stat_id : StringName
 var name : String
 var value : float = 0
 var bonus_value : float = 0
 var multiplier : float = 1
 var modifiers : Array[StatModifier]
+
+
 
 var _is_dirty : bool = false
 var _base : float = 0

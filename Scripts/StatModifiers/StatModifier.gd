@@ -1,5 +1,5 @@
 @abstract
-class_name StatModifier extends Resource
+class_name StatModifier extends RefCounted
 
 
 @export var stat_id : StringName

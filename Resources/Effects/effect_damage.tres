@@ -1,18 +1,17 @@
-[gd_resource type="Resource" script_class="InstantEffect" format=3 uid="uid://b64oquaqda0w0"]
+[gd_resource type="Resource" script_class="InstantEffectTemplate" format=3 uid="uid://b64oquaqda0w0"]
 
-[ext_resource type="Script" uid="uid://dm577y4atflkt" path="res://Scripts/StatModifiers/StatModifier.gd" id="1_mfe27"]
+[ext_resource type="Script" uid="uid://b7linnw2u2bcn" path="res://Scripts/StatModifiers/Templates/StatModifierTemplate.gd" id="1_mfe27"]
 [ext_resource type="Script" uid="uid://bvlmo7eyi5nvi" path="res://Scripts/ContextTag/ContextTag.gd" id="2_hpdt5"]
-[ext_resource type="Script" uid="uid://chwkqktce8dob" path="res://Scripts/Effect/InstantEffect.gd" id="2_uedng"]
-[ext_resource type="Resource" uid="uid://udfmdp0yb28r" path="res://Resources/ContextTags/tag_target.tres" id="3_t0u66"]
-[ext_resource type="Script" uid="uid://bf5mxoqvu0t3l" path="res://Scripts/StatModifiers/FlatStatModifier.gd" id="4_8vcx1"]
+[ext_resource type="Script" uid="uid://ett7q7dk3f8l" path="res://Scripts/Effect/Templates/InstantEffectTemplate.gd" id="2_uedng"]
+[ext_resource type="Script" uid="uid://yxewk2f711vu" path="res://Scripts/StatModifiers/Templates/FlatStatModifierTemplate.gd" id="3_rjjsx"]
 
-[sub_resource type="Resource" id="Resource_hnxxn"]
-script = ExtResource("4_8vcx1")
-stat_id = &"current_health"
-required_context = Array[ExtResource("2_hpdt5")]([ExtResource("3_t0u66")])
-metadata/_custom_type_script = "uid://bf5mxoqvu0t3l"
+[sub_resource type="Resource" id="Resource_hpdt5"]
+script = ExtResource("3_rjjsx")
+mode = -1
+stat_id = &"10"
+metadata/_custom_type_script = "uid://yxewk2f711vu"
 
 [resource]
 script = ExtResource("2_uedng")
-modifiers = Array[ExtResource("1_mfe27")]([SubResource("Resource_hnxxn")])
-metadata/_custom_type_script = "uid://chwkqktce8dob"
+modifier_templates = Array[ExtResource("1_mfe27")]([SubResource("Resource_hpdt5")])
+metadata/_custom_type_script = "uid://ett7q7dk3f8l"

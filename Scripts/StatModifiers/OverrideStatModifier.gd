@@ -3,7 +3,7 @@ class_name OverrideStatModifier extends StatModifier
 
 var old_value : float = 0
 
-func _init(value : float):
+func _init(stat_id : StringName, value : float):
 	self.value = value
 	pass
 

@@ -25,9 +25,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			var tile_model : TileModel = grid_data.get_tile_model_from_world(mouse_pos)
 			if tile_model != null and !tile_model.occupied:
 				var unit : Unit2D = DATA_TEST_UNIT.build_unit_from_data()#UNIT_TEST.instantiate() as Unit2D
-				unit.scale_tile_sprite(Vector2(grid_data.tile_size, grid_data.tile_size))
 				unit.global_position = tile_model.tile_global_pos
 				tile_model.occupied = true
 				grid_view.add_child(unit)
+				unit.scale_tile_sprite(Vector2(grid_data.tile_size, grid_data.tile_size))
 			
 	pass
