@@ -31,7 +31,7 @@ func _ready() -> void:
 	
 	#Initialize health manager
 	health_manager = HealthManager.new(stats.get_stat("max_health"), stats.get_stat("current_health"))
-	
+	#health_manager.health_depleted.connect()
 	
 	
 	
