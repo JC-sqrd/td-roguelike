@@ -1,29 +1,38 @@
 class_name Unit2D extends Area2D
 
 
-var unit_tile_size : int = 1
-@export var unit_data : UnitData
+var unit_tile_size : Vector2i = Vector2i(1,1)
+@export var unit_data_template : UnitDataTemplate
 @export var unit_sprite : Sprite2D
+@export var attack : Attack
+
+var unit_data : UnitData
 
 var stats : Stats
 
 var health_manager : HealthManager
+var context : Dictionary
 
 @export var offsets : Array[Vector2i] = [Vector2i(0,0)]  
 const EFFECT_DAMAGE = preload("uid://b64oquaqda0w0")
 
 func _ready() -> void:
+	unit_data = unit_data_template.build_unit_data()
+	stats = unit_data.stats
 	unit_tile_size = unit_data.unit_tile_size
+	context = {"stats" : stats, "actor" : self}
 	
-	if unit_sprite != null:
-		unit_sprite.texture = unit_data.unit_texture
+	attack.initialize(stats, self)
 	
-
+	var effect_listener : EffectListener = EffectListener.new(stats)
+	
+	#Register effect listener to effect server
+	EffectServer.register_effect_listener(get_rid(), effect_listener)
 	
 	#Initialize health manager
 	health_manager = HealthManager.new(stats.get_stat("max_health"), stats.get_stat("current_health"))
 	
-	var effect_listener : EffectListener = EffectListener.new(stats)
+	
 	
 	
 	var damage_effect : InstantEffect = InstantEffect.new()
@@ -33,10 +42,13 @@ func _ready() -> void:
 	damage_effect.add_modifier(damage_modifier)
 	damage_effect.add_modifier(health_modifier)
 	
-	
-	effect_listener.receive_effect(damage_effect, {})
-	effect_listener.receive_effect(EFFECT_DAMAGE.build_effect(), {})
-	
+	print("UNIT RID: " + str(get_rid()))
+	#effect_listener.receive_effect(damage_effect, context)
+	#effect_listener.receive_effect(EFFECT_DAMAGE.build_effect(), {})
+	await get_tree().create_timer(2).timeout
+	print("START ATTACK")
+	attack.start_attack()
+	#EffectServer.receive_effect(get_rid(), damage_effect, context)
 	pass
 
 

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="UnitDataTemplate" format=3 uid="uid://dv8vwpq3gwta2"]
+
+[ext_resource type="Script" uid="uid://duuceygtchlg0" path="res://Scripts/Unit/Resources/UnitDataTemplate.gd" id="1_xqrqk"]
+[ext_resource type="Resource" uid="uid://cotnxkja5h153" path="res://Resources/UnitStatsTemplates/stats_test_enemy.tres" id="2_m6n4w"]
+
+[resource]
+script = ExtResource("1_xqrqk")
+stats_template = ExtResource("2_m6n4w")
+metadata/_custom_type_script = "uid://duuceygtchlg0"

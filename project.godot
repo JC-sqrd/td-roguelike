@@ -18,6 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameManager="*uid://cwmovasw1gmmb"
+EffectServer="*uid://bnfjcvrgtm6id"
+GridServer="*uid://bqjfmmvsdor3g"
 
 [file_customization]
 
@@ -25,6 +27,12 @@ folder_colors={
 "res://Resources/": "orange",
 "res://Scripts/": "red"
 }
+
+[layer_names]
+
+2d_physics/layer_1="Unit"
+2d_physics/layer_2="Enemy"
+2d_physics/layer_3="World"
 
 [physics]
 
