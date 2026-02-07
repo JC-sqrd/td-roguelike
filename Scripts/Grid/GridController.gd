@@ -21,26 +21,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == MouseButton.MOUSE_BUTTON_LEFT:
 			var mouse_pos : Vector2 = grid_view.get_global_mouse_position()
-			var grid_index : int = grid_data.grid_to_index(grid_data.world_to_grid(mouse_pos))
-			print("Left Click Pressed: " + "Grid Index: " + str(grid_index) + " Mouse Pos: " + str(mouse_pos))
-			var tile_model : TileModel = grid_data.get_tile_model_from_world(mouse_pos)
-			if tile_model != null and !tile_model.occupied:
-				var unit : Unit2D = PREFAB_BASE_UNIT.instantiate() as Unit2D
-				unit.global_position = tile_model.tile_global_pos
-				tile_model.occupied = true
-				grid_view.add_child(unit)
-				unit.scale_tile_sprite(grid_data.tile_size)
+			GridServer.place_unit_on_mouse_tile(mouse_pos, PREFAB_BASE_UNIT.instantiate() as Unit2D)
 		elif event.pressed and event.button_index == MouseButton.MOUSE_BUTTON_RIGHT:
 			var mouse_pos : Vector2 = grid_view.get_global_mouse_position()
-			var grid_index : int = grid_data.grid_to_index(grid_data.world_to_grid(mouse_pos))
-			print("Right Click Pressed: " + "Grid Index: " + str(grid_index) + " Mouse Pos: " + str(mouse_pos))
-			var tile_model : TileModel = grid_data.get_tile_model_from_world(mouse_pos)
-			if tile_model != null and !tile_model.occupied:
-				var enemy : Unit2D = PREFAB_BASE_ENEMY.instantiate() as Unit2D
-				enemy.global_position = tile_model.tile_global_pos
-				tile_model.occupied = true
-				grid_view.add_child(enemy)
-				enemy.scale_tile_sprite(grid_data.tile_size)
+			GridServer.spawn_unit_on_mouse_tile(mouse_pos, PREFAB_BASE_ENEMY.instantiate() as Unit2D)
 			pass
 		pass
 	pass

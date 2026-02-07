@@ -9,6 +9,21 @@ var grid_rect : Rect2i
 
 var grid : Array[TileModel]
 
+var tiled_units : Dictionary[Unit2D, TileModel]
+
+func add_unit_on_tile(unit : Unit2D, tile_model : TileModel) -> bool:
+	if !tile_model.occupied:
+		tile_model.occupied = true
+		tiled_units[unit] = tile_model
+		return true
+	return false
+
+func remove_unit_on_tile(unit : Unit2D, tile_model : TileModel) -> bool:
+	if tiled_units.has(unit):
+		tiled_units.erase(unit)
+		tile_model.occupied = false
+		return true
+	return false
 
 func world_to_grid(world_pos : Vector2) -> Vector2i:
 	var map_pos : Vector2i = Vector2i(floor(world_pos.x / tile_size.x), floor(world_pos.y / tile_size.y)) 

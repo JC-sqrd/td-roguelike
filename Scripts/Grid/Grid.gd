@@ -13,9 +13,14 @@ func _ready() -> void:
 func initialize():
 	grid_data = generate_model_from_tile_map(self)
 	
+	GridServer.main_grid = grid_data
+	GridServer.placed_unit_on_tile.connect(_on_unit_placed_on_tile_model)
+	GridServer.spawned_unit_on_tile.connect(_on_unit_spawned_on_tile_model)
+	
 	if grid_controller != null:
 		grid_controller.initialize(grid_data, self)
 		pass
+	
 	pass
 
 func generate_model_from_tile_map(tile_map_layer : TileMapLayer) -> GridData:
@@ -39,6 +44,7 @@ func generate_model_from_tile_map(tile_map_layer : TileMapLayer) -> GridData:
 			
 			if tile_data:
 				var tile_model : TileModel = TileModel.new()
+				tile_model.tile_index = Vector2i(x,y)
 				tile_model.tile_data = tile_data
 				tile_model.tile_global_pos = tile_global_pos
 				grid[x + (y * used_rect.size.x)] = tile_model
@@ -50,3 +56,18 @@ func generate_model_from_tile_map(tile_map_layer : TileMapLayer) -> GridData:
 	grid_data.grid = grid
 	print(grid)
 	return grid_data
+
+
+func _on_unit_placed_on_tile_model(unit : Unit2D, tile_model : TileModel):
+	print("PLACED UNIT ON TILE " + str(tile_model.tile_index))
+	unit.global_position = tile_model.tile_global_pos
+	add_child(unit)
+	unit.scale_tile_sprite(grid_data.tile_size)
+	pass
+
+func _on_unit_spawned_on_tile_model(unit : Unit2D, tile_model : TileModel):
+	print("SPAWNED UNIT ON TILE " + str(tile_model.tile_index))
+	unit.global_position = tile_model.tile_global_pos
+	add_child(unit)
+	unit.scale_tile_sprite(grid_data.tile_size)
+	pass

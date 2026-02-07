@@ -1,0 +1,1 @@
+class_name ScannerRayCast2D extends RayCast2D

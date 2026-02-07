@@ -1,6 +1,6 @@
 class_name Projectile extends RefCounted
 
-var canvas_item : CanvasItem
+var parent_canvas_item : CanvasItem
 var canvas_item_rid : RID
 var body : RID
 var shape : RID
@@ -13,19 +13,37 @@ var speed : float = 0
 var lifetime : float = 5
 var _lifetime_counter : float = 0
 
-func _init(body : RID, shape : RID,canvas_item_rid : RID, canvas_item : CanvasItem, texture : Texture2D, speed : float = 0):
+var effects : Array[Effect]
+
+func _init(body : RID, shape : RID,canvas_item_rid : RID, parent_canvas_item : CanvasItem, texture : Texture2D,position : Vector2, speed : float = 0):
 	self.body = body
 	self.canvas_item_rid = canvas_item_rid
-	self.canvas_item = canvas_item
+	self.parent_canvas_item = parent_canvas_item
 	self.shape = shape
 	self.texture = texture
 	self.speed = speed
+	self.position = position
 	
 	PhysicsServer2D.body_add_shape(self.body, self.shape)
 	
-	RenderingServer.canvas_item_set_parent(canvas_item_rid, canvas_item.get_canvas())
-	RenderingServer.canvas_item_add_texture_rect(self.canvas_item_rid, Rect2(self.position.x, self.position.y, self.texture.get_width(), self.texture.get_height()), self.texture)
+	RenderingServer.canvas_item_set_parent(canvas_item_rid, parent_canvas_item.get_canvas())
+	#RenderingServer.canvas_item_set_parent(canvas_item_rid, parent_canvas_item.get_tree().root.get_viewport_rid())
 	pass
+
+func create_projectile(params : CreateProjectileParams) -> Projectile:
+	var projectile : Projectile = Projectile.new(PhysicsServer2D.body_create(), params.shape, RenderingServer.canvas_item_create(), params.canvas_item, params.texture, params.position)
+	#Physics
+	projectile.set_lifettime(params.lifetime)
+	projectile.set_speed(params.speed)
+	projectile.set_direction(params.position)
+	projectile.set_position(params.position)
+	PhysicsServer2D.shape_set_data(projectile.shape, params.shape_data)
+	projectile.set_body_mode(PhysicsServer2D.BODY_MODE_KINEMATIC).set_body_space(parent_canvas_item.get_world_2d().space)
+	projectile.set_body_collision_layer(0)
+	projectile.set_body_collision_mask(2)
+	#Render
+	projectile.draw_projectile()
+	return projectile
 
 func add_lifetime_counter(delta : float) -> bool:
 	_lifetime_counter += delta
@@ -49,6 +67,12 @@ func set_lifettime(lifetime : float):
 	self.lifetime = lifetime
 	pass
 
+func draw_projectile():
+	RenderingServer.canvas_item_add_texture_rect(self.canvas_item_rid, Rect2(0, 0, self.texture.get_width(), self.texture.get_height()), self.texture)
+	var transform : Transform2D = Transform2D(0, position) 
+	RenderingServer.canvas_item_set_transform(canvas_item_rid, transform)
+	pass
+
 func set_body_mode(mode : PhysicsServer2D.BodyMode) -> Projectile:
 	PhysicsServer2D.body_set_mode(self.body, mode)
 	return self
@@ -56,6 +80,10 @@ func set_body_mode(mode : PhysicsServer2D.BodyMode) -> Projectile:
 func set_body_space(space : RID) -> Projectile:
 	PhysicsServer2D.body_set_space(self.body, space)
 	return self
+
+func add_effect(effect : Effect):
+	effects.append(effect)
+	pass
 
 func add_body_shape(shape : RID) -> Projectile:
 	PhysicsServer2D.body_add_shape(self.body, shape)
@@ -73,6 +101,7 @@ pass
 func set_canvas_item_parent(canvas_item : CanvasItem):
 	RenderingServer.canvas_item_set_parent(canvas_item_rid, canvas_item.get_canvas())
 	pass
+
 
 
 func destroy_projectile():

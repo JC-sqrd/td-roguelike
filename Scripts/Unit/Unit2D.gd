@@ -13,6 +13,8 @@ var stats : Stats
 var health_manager : HealthManager
 var context : Dictionary
 
+signal died(unit : Unit2D)
+
 @export var offsets : Array[Vector2i] = [Vector2i(0,0)]  
 const EFFECT_DAMAGE = preload("uid://b64oquaqda0w0")
 
@@ -31,7 +33,7 @@ func _ready() -> void:
 	
 	#Initialize health manager
 	health_manager = HealthManager.new(stats.get_stat("max_health"), stats.get_stat("current_health"))
-	#health_manager.health_depleted.connect()
+	health_manager.health_depleted.connect(_on_health_depleted)
 	
 	
 	
@@ -45,9 +47,9 @@ func _ready() -> void:
 	print("UNIT RID: " + str(get_rid()))
 	#effect_listener.receive_effect(damage_effect, context)
 	#effect_listener.receive_effect(EFFECT_DAMAGE.build_effect(), {})
-	await get_tree().create_timer(2).timeout
-	print("START ATTACK")
-	attack.start_attack()
+	#await get_tree().create_timer(2).timeout
+	#print("START ATTACK")
+	#attack.start_attack()
 	#EffectServer.receive_effect(get_rid(), damage_effect, context)
 	pass
 
@@ -57,4 +59,14 @@ func scale_tile_sprite(tile_size : Vector2):
 		var target_scale : Vector2 = Vector2(tile_size.x / unit_sprite.texture.get_width(), tile_size.y / unit_sprite.texture.get_height())
 		unit_sprite.scale = target_scale
 		print("Unit Sprite scaled")
+	pass
+
+func die():
+	died.emit(self)
+	queue_free()
+	pass
+
+func _on_health_depleted():
+	died.emit(self)
+	queue_free()
 	pass

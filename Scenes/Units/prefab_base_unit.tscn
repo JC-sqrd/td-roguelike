@@ -13,10 +13,11 @@
 [ext_resource type="Script" uid="uid://cnngi3m1507r7" path="res://Scripts/StatModifiers/Templates/OverrideStatModifierTemplate.gd" id="11_6d1bv"]
 [ext_resource type="Script" uid="uid://ett7q7dk3f8l" path="res://Scripts/Effect/Templates/InstantEffectTemplate.gd" id="12_prmna"]
 [ext_resource type="Texture2D" uid="uid://d10osc5j0bcnt" path="res://Placeholders/Sprites/Fireball.png" id="13_ma03g"]
+[ext_resource type="Script" uid="uid://b7vrud1ewt7fv" path="res://Scripts/Attack/Scanner/ScannerRayCast2D.gd" id="14_ewnxi"]
 
 [sub_resource type="Resource" id="Resource_4bxgl"]
 script = ExtResource("9_n8srb")
-value = 50.0
+value = 10.0
 metadata/_custom_type_script = "uid://biebgrl65lhdp"
 
 [sub_resource type="Resource" id="Resource_vxd83"]
@@ -35,6 +36,7 @@ metadata/_custom_type_script = "uid://ett7q7dk3f8l"
 size = Vector2(128, 128)
 
 [node name="PrefabBaseUnit" type="Area2D" unique_id=1989289329 node_paths=PackedStringArray("unit_sprite", "attack")]
+z_index = 1
 texture_filter = 1
 collision_mask = 0
 monitoring = false
@@ -52,20 +54,24 @@ script = ExtResource("4_j3cu2")
 ray_casts = [NodePath("../RayCast2D")]
 metadata/_custom_type_script = "uid://cxrtec2mkmkwa"
 
-[node name="Attack" type="Node" parent="." unique_id=2138320614 node_paths=PackedStringArray("spawn_position_node", "scanner")]
+[node name="Attack" type="Node" parent="." unique_id=2138320614 node_paths=PackedStringArray("spawn_position_node", "scanner", "attack_timer")]
 script = ExtResource("5_58nij")
 effects_templates = Array[ExtResource("6_8te2y")]([SubResource("Resource_t0del")])
-spawn_position_node = NodePath("../Sprite2D")
+spawn_position_node = NodePath("../RayCast2D")
 projectile_texture = ExtResource("13_ma03g")
 scanner = NodePath("../Scanner2D")
+attack_timer = NodePath("AttackTimer")
 metadata/_custom_type_script = "uid://dx787c60s4yjx"
+
+[node name="AttackTimer" type="Timer" parent="Attack" unique_id=2036632767]
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=1931951332]
 position = Vector2(0, -64)
-target_position = Vector2(320, 0)
+target_position = Vector2(1216, 0)
 collision_mask = 2
 collide_with_areas = true
 collide_with_bodies = false
+script = ExtResource("14_ewnxi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=218167598]
 position = Vector2(0, -64)
