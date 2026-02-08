@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bvlmo7eyi5nvi" path="res://Scripts/ContextTag/ContextTag.gd" id="2_hpdt5"]
 [ext_resource type="Script" uid="uid://ett7q7dk3f8l" path="res://Scripts/Effect/Templates/InstantEffectTemplate.gd" id="2_uedng"]
+[ext_resource type="Script" uid="uid://h5q0xghe0ry1" path="res://Scripts/StatModifiers/ValueProvider/BonusValue/BonusValue.gd" id="3_8vcx1"]
 [ext_resource type="Script" uid="uid://yxewk2f711vu" path="res://Scripts/StatModifiers/Templates/FlatStatModifierTemplate.gd" id="3_rjjsx"]
 [ext_resource type="Script" uid="uid://biebgrl65lhdp" path="res://Scripts/StatModifiers/ValueProvider/Templates/ValueProviderTemplate.gd" id="3_t0u66"]
 [ext_resource type="Script" uid="uid://ck25fp8ei7dte" path="res://Scripts/StatModifiers/Templates/MultiplierStatModifierTemplate.gd" id="4_hpdt5"]

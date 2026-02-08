@@ -5,5 +5,5 @@ class_name EffectTemplate extends Resource
 @export var mult_modifiers : Array[MultiplierStatModifierTemplate]
 @export var override_modifiers : Array[OverrideStatModifierTemplate]
 
-func build_effect() -> Effect:
+func build_effect(context : Dictionary[StringName, Variant]) -> Effect:
 	return null

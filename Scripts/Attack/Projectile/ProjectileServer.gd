@@ -13,7 +13,10 @@ func _physics_process(delta: float) -> void:
 	if projectiles.size() == 0:
 		return
 	
-	simulate_projectiles(delta)
+	for p in projectiles:
+		p.simulate_projectiles(delta, remove_projectile)
+	
+	#simulate_projectiles(delta)
 	
 	print("TOTAL PROJECTILES: " + str(projectiles.size()))
 	pass
@@ -60,3 +63,7 @@ func simulate_projectiles(delta : float):
 			p.destroy_projectile()
 		
 		pass
+
+func remove_projectile(projectile : Projectile):
+	projectiles.erase(projectile)
+	pass

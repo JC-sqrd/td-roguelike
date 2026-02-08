@@ -1,18 +1,13 @@
 class_name ProjectileAttack extends Attack
 
-@export var effects_templates : Array[EffectTemplate]
+
 @export var spawn_position_node : Node2D
-
 @export var projectile_texture : Texture2D
-
-var effects : Array[Effect]
 
 var projectiles : Array[Projectile]
 
-
 func _ready() -> void:
-	for effect_template in effects_templates:
-		effects.append(effect_template.build_effect())
+	super()
 	scanner.collision_enter.connect(_on_scanner_collision_enter)
 	scanner.collision_exit.connect(_on_scanner_collision_exit)
 	attack_timer.timeout.connect(_on_attack_timer_timeout)
@@ -85,7 +80,7 @@ func _on_attack_timer_timeout():
 func create_projectile():
 	var projectile : Projectile = Projectile.new(PhysicsServer2D.body_create(), PhysicsServer2D.circle_shape_create(), RenderingServer.canvas_item_create(), canvas_item, projectile_texture, spawn_position_node.global_position)
 	#Physics
-	projectile.set_lifettime(15)
+	projectile.set_lifettime(10)
 	projectile.set_speed(400)
 	projectile.set_direction(Vector2(1,0))
 	projectile.set_position(spawn_position_node.global_position)

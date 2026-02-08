@@ -5,12 +5,12 @@ class_name StatsTemplate extends Resource
 var stats : Dictionary[StringName, Stat]
 
 
-func build_stats_from_template() -> Stats:
-	var stats : Stats = Stats.new()
+func build_stats_from_template() -> Dictionary[StringName,Stat]:
+	var stats_dict : Dictionary[StringName,Stat]
 	for stat_template in stat_templates:
-		stats.stat_dict[stat_template.stat_id] = stat_template.build_stat()
+		stats_dict[stat_template.stat_id] = stat_template.build_stat()
 		pass
-	return stats
+	return stats_dict
 
 func build_stat_templates():
 	for stat_template in stat_templates:

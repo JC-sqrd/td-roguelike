@@ -102,7 +102,37 @@ func set_canvas_item_parent(canvas_item : CanvasItem):
 	RenderingServer.canvas_item_set_parent(canvas_item_rid, canvas_item.get_canvas())
 	pass
 
-
+func simulate_projectiles(delta : float, callback_func : Callable):
+	velocity = Vector2(direction.x * speed * delta, direction.y * speed * delta)
+	position += velocity
+	#print("PROJECTILE VELOCITY: " + str(p.velocity))
+	var transform : Transform2D = Transform2D(0, position)
+	RenderingServer.canvas_item_set_transform(canvas_item_rid, transform)
+	PhysicsServer2D.body_set_state(body, PhysicsServer2D.BODY_STATE_TRANSFORM, transform)
+	
+	#var state : PhysicsDirectBodyState2D = PhysicsServer2D.body_get_direct_state(p.body)
+	var space_state := parent_canvas_item.get_world_2d().direct_space_state
+	var params : PhysicsShapeQueryParameters2D = PhysicsShapeQueryParameters2D.new()
+	
+	params.shape_rid = shape
+	params.transform = transform
+	params.collide_with_areas = true
+	params.collide_with_bodies = false
+	params.collision_mask = 2
+	
+	var results = space_state.intersect_shape(params)
+	for result in results:
+		var area_rid : RID = result.rid
+		#print("Projectile hit: " + str(area_rid))
+		for effect in effects:
+			EffectServer.receive_effect(area_rid, effect, {})
+		callback_func.call(self)
+		destroy_projectile()
+		
+	if add_lifetime_counter(delta):
+		callback_func.call(self)
+		destroy_projectile()
+		pass
 
 func destroy_projectile():
 	PhysicsServer2D.free_rid(body)

@@ -6,4 +6,5 @@
 [resource]
 script = ExtResource("1_wwvet")
 stats_template = ExtResource("2_v5pkk")
+unit_tile_size = null
 metadata/_custom_type_script = "uid://duuceygtchlg0"

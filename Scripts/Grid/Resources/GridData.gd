@@ -34,6 +34,11 @@ func grid_to_index(grid_pos : Vector2i) -> int:
 		return -1
 	return grid_pos.x + (grid_pos.y * grid_rect.size.x)
 
+func get_tile_model_from_grid(index : int) -> TileModel:
+	if index != -1:
+		return grid[index]
+	return null
+
 func get_tile_model_from_world(world_pos : Vector2) -> TileModel:
 	var map_pos : Vector2i = world_to_grid(world_pos)
 	var index : int = grid_to_index(map_pos)

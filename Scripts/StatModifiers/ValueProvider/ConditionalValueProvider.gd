@@ -1,7 +1,6 @@
 class_name ConditionalValueProvider extends ValueProvider
 
 enum Type {GREATER_THAN, LESSER_THAN}
-var bonus_value : float = 0
 var conditional_stat_id : StringName
 var threshold : float = 0
 var type : Type = Type.GREATER_THAN

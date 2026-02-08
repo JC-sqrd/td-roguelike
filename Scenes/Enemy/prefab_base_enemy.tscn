@@ -1,21 +1,22 @@
 [gd_scene format=3 uid="uid://cjmpcvq57n4k6"]
 
 [ext_resource type="Script" uid="uid://cw8502r5o4cxs" path="res://Scripts/Unit/EnemyUnit2D.gd" id="1_7wuab"]
-[ext_resource type="Resource" uid="uid://dv8vwpq3gwta2" path="res://Resources/UnitDataTemplate/test_enemy_data_template.tres" id="2_0hy47"]
 [ext_resource type="Texture2D" uid="uid://bmfa1k5yfxtqe" path="res://Placeholders/Sprites/Enemy_Front.png" id="3_xhd5l"]
 [ext_resource type="Script" uid="uid://dx787c60s4yjx" path="res://Scripts/Attack/Attack.gd" id="4_7wuab"]
+[ext_resource type="Script" uid="uid://bwluoofyu0fhe" path="res://Scripts/Stat/Stats.gd" id="5_7dsm4"]
 [ext_resource type="Script" uid="uid://cxjyo70m4kg8v" path="res://Scripts/Movement/EnemyMovement.gd" id="5_htpe8"]
+[ext_resource type="Resource" uid="uid://cotnxkja5h153" path="res://Resources/UnitStatsTemplates/stats_test_enemy.tres" id="6_6bsue"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xhd5l"]
 size = Vector2(128, 128)
 
-[node name="PrefabBaseEnemy" type="Area2D" unique_id=532828671 node_paths=PackedStringArray("movement", "unit_sprite", "attack")]
+[node name="PrefabBaseEnemy" type="Area2D" unique_id=532828671 node_paths=PackedStringArray("movement", "stats", "unit_sprite", "attack")]
 collision_layer = 2
 collision_mask = 0
 monitoring = false
 script = ExtResource("1_7wuab")
 movement = NodePath("EnemyMovement")
-unit_data_template = ExtResource("2_0hy47")
+stats = NodePath("Stats")
 unit_sprite = NodePath("Sprite2D")
 attack = NodePath("Attack")
 metadata/_custom_type_script = "uid://cgweddqijr87x"
@@ -36,3 +37,8 @@ metadata/_custom_type_script = "uid://dx787c60s4yjx"
 script = ExtResource("5_htpe8")
 speed = 50.0
 metadata/_custom_type_script = "uid://cxjyo70m4kg8v"
+
+[node name="Stats" type="Node" parent="." unique_id=1913965504]
+script = ExtResource("5_7dsm4")
+stats_template = ExtResource("6_6bsue")
+metadata/_custom_type_script = "uid://bwluoofyu0fhe"

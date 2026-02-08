@@ -1,19 +1,31 @@
 class_name Attack extends Node
 
 @export var scanner : Scanner2D
+@export var effects_templates : Array[EffectTemplate]
 @export var attack_rate : float = 1
 @export var attack_timer : Timer
+@export var attack_damage_stat_template : StatTemplate
 
+var attack_context : Dictionary[StringName, Variant]
 var attack_speed : float = 1
 var canvas_item : CanvasItem
+var effects : Array[Effect]
 
 var can_attack : bool = false
 
+var actor : Unit2D
 var stats : Stats
 
-func initialize(stats : Stats, canvas_item : CanvasItem):
-	self.stats = stats
-	self.canvas_item = canvas_item
+func _ready():
+	pass
+
+func initialize(actor : Unit2D):
+	self.actor = actor
+	self.stats = actor.stats
+	self.canvas_item = actor as CanvasItem
+	attack_context["actor"] = actor
+	for effect_template in effects_templates:
+		effects.append(effect_template.build_effect(attack_context))
 	pass
 
 func _on_scanner_collision_enter():

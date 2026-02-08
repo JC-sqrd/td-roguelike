@@ -2,9 +2,9 @@ class_name PeriodicEffectTemplate extends EffectTemplate
 
 
 
-func build_effect() -> Effect:
+func build_effect(context : Dictionary[StringName, Variant]) -> Effect:
 	var modifier_templates : = flat_modifiers + mult_modifiers + override_modifiers
 	var modifiers : Array[StatModifier]
-	for template in modifier_templates:
-		modifiers.append(template.build_modifier())
+	for template : StatModifierTemplate in modifier_templates:
+		modifiers.append(template.build_modifier(context))
 	return PeriodicEffect.new(modifiers)

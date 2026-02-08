@@ -4,17 +4,18 @@ extends Unit2D
 @export var movement : UnitMovement
 
 func _ready() -> void:
-	unit_data = unit_data_template.build_unit_data()
-	stats = unit_data.stats
-	unit_tile_size = unit_data.unit_tile_size
+	#stats = unit_data.stats
+	stats.initialize(self)
 	context = {"stats" : stats, "actor" : self}
 	
-	attack.initialize(stats, self)
+	attack.initialize(self)
 	
 	var effect_listener : EffectListener = EffectListener.new(stats)
 	
 	#Register effect listener to effect server
 	EffectServer.register_effect_listener(get_rid(), effect_listener)
+	
+	print("CURRENT HEALHT STAT: " + str(stats.get_stat("current_health"))) 
 	
 	#Initialize health manager
 	health_manager = HealthManager.new(stats.get_stat("max_health"), stats.get_stat("current_health"))

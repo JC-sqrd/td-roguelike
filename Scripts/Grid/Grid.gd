@@ -35,6 +35,8 @@ func generate_model_from_tile_map(tile_map_layer : TileMapLayer) -> GridData:
 	var grid : Array[TileModel] = []
 	grid.resize(used_rect.size.x * used_rect.size.y)
 	
+	var columns : int = 0
+	var rows : int = 0
 	
 	for x in range(used_rect.size.x):
 		for y in range(used_rect.size.y):
@@ -52,6 +54,9 @@ func generate_model_from_tile_map(tile_map_layer : TileMapLayer) -> GridData:
 				grid[x + (y * used_rect.size.x)] = null
 			pass
 		pass
+		
+	grid_data.grid_x_size = used_rect.size.x
+	grid_data.grid_y_size = used_rect.size.y
 	grid_data.tile_size = tile_size
 	grid_data.grid = grid
 	print(grid)

@@ -7,5 +7,7 @@ class_name StatTemplate extends Resource
 @export var multiplier : float = 1
 
 
+
 func build_stat() -> Stat:
-	return Stat.new(stat_id, value, name, bonus_value, multiplier)
+	var stat : Stat = Stat.new(stat_id, value, name, bonus_value, multiplier)
+	return stat
