@@ -23,8 +23,6 @@ const EFFECT_DAMAGE = preload("uid://b64oquaqda0w0")
 func _ready() -> void:
 	#stats = unit_data.stats
 	stats.initialize(self)
-	unit_tile_size
-	print("MAX HEALTH : " + str(stats.get_stat("max_health").get_value()))
 	
 	context = {"stats" : stats, "actor" : self}
 	
@@ -54,7 +52,6 @@ func scale_tile_sprite(tile_size : Vector2):
 	if unit_sprite != null:
 		var target_scale : Vector2 = Vector2(tile_size.x / unit_sprite.texture.get_width(), tile_size.y / unit_sprite.texture.get_height())
 		unit_sprite.scale = target_scale
-		print("Unit Sprite scaled")
 	pass
 
 func die():

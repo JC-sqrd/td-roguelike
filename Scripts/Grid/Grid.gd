@@ -59,7 +59,6 @@ func generate_model_from_tile_map(tile_map_layer : TileMapLayer) -> GridData:
 	grid_data.grid_y_size = used_rect.size.y
 	grid_data.tile_size = tile_size
 	grid_data.grid = grid
-	print(grid)
 	return grid_data
 
 

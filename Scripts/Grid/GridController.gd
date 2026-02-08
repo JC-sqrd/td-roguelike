@@ -9,14 +9,6 @@ func initialize(grid_data : GridData, grid_view : Grid):
 	self.grid_data = grid_data
 	self.grid_view = grid_view
 	active = true
-	
-	#for i in range(grid_data.grid_y_size):
-		#print("INDEX: " + str(i))
-		#for j in range(200):
-			##await get_tree().create_timer(0.1).timeout
-			#GridServer.spawn_unit_on_grid_tile(Vector2i(8,i), PREFAB_BASE_ENEMY.instantiate() as Unit2D)
-			#pass
-		#pass
 	pass
 
 const PREFAB_BASE_UNIT = preload("uid://wk226ka6adsl")

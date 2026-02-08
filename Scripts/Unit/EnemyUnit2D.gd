@@ -15,8 +15,6 @@ func _ready() -> void:
 	#Register effect listener to effect server
 	EffectServer.register_effect_listener(get_rid(), effect_listener)
 	
-	print("CURRENT HEALHT STAT: " + str(stats.get_stat("current_health"))) 
-	
 	#Initialize health manager
 	health_manager = HealthManager.new(stats.get_stat("max_health"), stats.get_stat("current_health"))
 	health_manager.health_depleted.connect(_on_health_depleted)

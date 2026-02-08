@@ -33,7 +33,6 @@ func simulate_projectiles(delta : float):
 	for p in projectiles:
 		p.velocity = Vector2(p.direction.x * p.speed * delta, p.direction.y * p.speed * delta)
 		p.position += p.velocity
-		#print("PROJECTILE VELOCITY: " + str(p.velocity))
 		var transform : Transform2D = Transform2D(0, p.position)
 		RenderingServer.canvas_item_set_transform(p.canvas_item_rid, transform)
 		PhysicsServer2D.body_set_state(p.body, PhysicsServer2D.BODY_STATE_TRANSFORM, transform)
@@ -52,7 +51,6 @@ func simulate_projectiles(delta : float):
 		var results = space_state.intersect_shape(params)
 		for result in results:
 			var area_rid : RID = result.rid
-			#print("Projectile hit: " + str(area_rid))
 			for effect in p.effects:
 				EffectServer.receive_effect(area_rid, effect, {})
 			projectiles.erase(p)

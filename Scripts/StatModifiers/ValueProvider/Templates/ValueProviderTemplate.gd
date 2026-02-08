@@ -8,5 +8,4 @@ func build_value_provider(context : Dictionary[StringName, Variant]) -> ValuePro
 	var bonus_value : float = 0
 	for bonus in bonus_values:
 		bonus_value += bonus.get_bonus_value(context)
-	print("BONUS VALUE: " + str(bonus_value))
 	return ValueProvider.new(value, bonus_value)

@@ -105,7 +105,6 @@ func set_canvas_item_parent(canvas_item : CanvasItem):
 func simulate_projectiles(delta : float, callback_func : Callable):
 	velocity = Vector2(direction.x * speed * delta, direction.y * speed * delta)
 	position += velocity
-	#print("PROJECTILE VELOCITY: " + str(p.velocity))
 	var transform : Transform2D = Transform2D(0, position)
 	RenderingServer.canvas_item_set_transform(canvas_item_rid, transform)
 	PhysicsServer2D.body_set_state(body, PhysicsServer2D.BODY_STATE_TRANSFORM, transform)
@@ -123,7 +122,6 @@ func simulate_projectiles(delta : float, callback_func : Callable):
 	var results = space_state.intersect_shape(params)
 	for result in results:
 		var area_rid : RID = result.rid
-		#print("Projectile hit: " + str(area_rid))
 		for effect in effects:
 			EffectServer.receive_effect(area_rid, effect, {})
 		callback_func.call(self)
