@@ -67,7 +67,7 @@ func simulate_projectiles(delta : float):
 		pass
 
 func _on_scanner_collision_enter():
-	attack_timer.start(attack_speed_stat.get_value())
+	attack_timer.start(attack_rate_stat.get_value())
 	pass
 
 func _on_scanner_collision_exit():

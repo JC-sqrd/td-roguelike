@@ -8,25 +8,59 @@
 [ext_resource type="Script" uid="uid://cxrtec2mkmkwa" path="res://Scripts/Attack/Scanner/Scanner.gd" id="6_6kp07"]
 [ext_resource type="Script" uid="uid://cbxu2cfwgpjwg" path="res://Scripts/Stat/StatTemplate.gd" id="7_5jekv"]
 [ext_resource type="Script" uid="uid://b7vrud1ewt7fv" path="res://Scripts/Attack/Scanner/ScannerRayCast2D.gd" id="7_62wgn"]
+[ext_resource type="Script" uid="uid://cxgihn8no5760" path="res://Scripts/Attack/Melee/MeleeTemplate/MeleeTemplate.gd" id="7_uiym3"]
+[ext_resource type="Script" uid="uid://dd4um3m2dou6w" path="res://Scripts/Attack/Melee/MeleeTemplate/MeleeShape/RectangleMeleeShape.gd" id="8_3hejh"]
+[ext_resource type="Texture2D" uid="uid://qgjlnpdnd6tn" path="res://Placeholders/Sprites/FastEnemy_Front.png" id="9_150p1"]
+[ext_resource type="Script" uid="uid://rq6t2ktj4pbf" path="res://Scripts/Effect/Templates/EffectTemplate.gd" id="10_dfsfn"]
+[ext_resource type="Script" uid="uid://yxewk2f711vu" path="res://Scripts/StatModifiers/Templates/FlatStatModifierTemplate.gd" id="11_s0bs6"]
+[ext_resource type="Script" uid="uid://bvlmo7eyi5nvi" path="res://Scripts/ContextTag/ContextTag.gd" id="12_flsbn"]
+[ext_resource type="Script" uid="uid://h5q0xghe0ry1" path="res://Scripts/StatModifiers/ValueProvider/BonusValue/BonusValue.gd" id="13_heoxh"]
+[ext_resource type="Script" uid="uid://biebgrl65lhdp" path="res://Scripts/StatModifiers/ValueProvider/Templates/ValueProviderTemplate.gd" id="14_r0kol"]
+[ext_resource type="Script" uid="uid://ck25fp8ei7dte" path="res://Scripts/StatModifiers/Templates/MultiplierStatModifierTemplate.gd" id="15_8yfn4"]
+[ext_resource type="Script" uid="uid://cnngi3m1507r7" path="res://Scripts/StatModifiers/Templates/OverrideStatModifierTemplate.gd" id="16_ev4kc"]
+[ext_resource type="Script" uid="uid://ett7q7dk3f8l" path="res://Scripts/Effect/Templates/InstantEffectTemplate.gd" id="17_u5qbr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3vfox"]
 size = Vector2(128, 128)
 
-[sub_resource type="Resource" id="Resource_uiym3"]
-script = ExtResource("7_5jekv")
-name = "Attack Speed"
-stat_id = &"attack_speed"
-value = 1.0
-metadata/_custom_type_script = "uid://cbxu2cfwgpjwg"
+[sub_resource type="Resource" id="Resource_ia0og"]
+script = ExtResource("8_3hejh")
+metadata/_custom_type_script = "uid://dd4um3m2dou6w"
 
-[sub_resource type="Resource" id="Resource_me1lg"]
+[sub_resource type="Resource" id="Resource_3hejh"]
+script = ExtResource("7_uiym3")
+shape = SubResource("Resource_ia0og")
+texture = ExtResource("9_150p1")
+collision_mask = 2
+metadata/_custom_type_script = "uid://cxgihn8no5760"
+
+[sub_resource type="Resource" id="Resource_h4fy8"]
+script = ExtResource("14_r0kol")
+value = 60.0
+metadata/_custom_type_script = "uid://biebgrl65lhdp"
+
+[sub_resource type="Resource" id="Resource_b70jw"]
+script = ExtResource("11_s0bs6")
+mode = -1
+stat_id = &"current_health"
+value_provider_template = SubResource("Resource_h4fy8")
+metadata/_custom_type_script = "uid://yxewk2f711vu"
+
+[sub_resource type="Resource" id="Resource_4i4a7"]
+script = ExtResource("17_u5qbr")
+flat_modifiers = Array[ExtResource("11_s0bs6")]([SubResource("Resource_b70jw")])
+metadata/_custom_type_script = "uid://ett7q7dk3f8l"
+
+[sub_resource type="Resource" id="Resource_150p1"]
 script = ExtResource("7_5jekv")
-name = "Attack Damage"
-stat_id = &"attack_damage"
-value = 25.0
+name = "Attack Rate"
+stat_id = &"attack_rate"
+value = 1.2
 metadata/_custom_type_script = "uid://cbxu2cfwgpjwg"
 
 [node name="MeleeUnit" type="Area2D" unique_id=1011832565 node_paths=PackedStringArray("stats", "unit_sprite", "attack")]
+collision_mask = 0
+monitoring = false
 script = ExtResource("1_ofjnw")
 stats = NodePath("Stats")
 unit_sprite = NodePath("Sprite2D")
@@ -46,6 +80,9 @@ texture = ExtResource("2_3vfox")
 [node name="ScannerRayCast2D" type="RayCast2D" parent="." unique_id=975616008]
 position = Vector2(0, -64)
 target_position = Vector2(192, 0)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
 script = ExtResource("7_62wgn")
 metadata/_custom_type_script = "uid://b7vrud1ewt7fv"
 
@@ -56,10 +93,14 @@ metadata/_custom_type_script = "uid://bwluoofyu0fhe"
 
 [node name="Attack" type="Node" parent="." unique_id=994382061 node_paths=PackedStringArray("scanner", "attack_timer")]
 script = ExtResource("5_hur62")
+melee_template = SubResource("Resource_3hejh")
+anim_frames = 4
+anim_step = 0.083
+active_frames = Array[int]([3, 4, 5])
 scanner = NodePath("../Scanner2D")
-attack_speed_stat_template = SubResource("Resource_uiym3")
+effects_templates = Array[ExtResource("10_dfsfn")]([SubResource("Resource_4i4a7")])
+attack_rate_stat_template = SubResource("Resource_150p1")
 attack_timer = NodePath("AttackTimer")
-attack_damage_stat_template = SubResource("Resource_me1lg")
 metadata/_custom_type_script = "uid://g3tqyp6eubwp"
 
 [node name="AttackTimer" type="Timer" parent="Attack" unique_id=95477945]

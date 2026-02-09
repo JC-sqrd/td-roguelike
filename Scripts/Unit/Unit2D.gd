@@ -26,11 +26,9 @@ func _ready() -> void:
 	
 	context = {"stats" : stats, "actor" : self}
 	
-	
 	attack.initialize(self)
 	
 	var effect_listener : EffectListener = EffectListener.new(stats)
-	
 	
 	#Register effect listener to effect server
 	EffectServer.register_effect_listener(get_rid(), effect_listener)
@@ -43,8 +41,10 @@ func _ready() -> void:
 	var damage_modifier : FlatStatModifier = FlatStatModifier.new("current_health",ValueProvider.new(50), FlatStatModifier.Mode.SUBTRACT)
 	var health_modifier : MultiplierStatModifier = MultiplierStatModifier.new("current_health", ValueProvider.new(-0.5))
 	
+	
 	damage_effect.add_modifier(damage_modifier)
 	damage_effect.add_modifier(health_modifier)
+	
 	pass
 
 

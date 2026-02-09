@@ -11,11 +11,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xhd5l"]
 size = Vector2(128, 128)
 
-[sub_resource type="Resource" id="Resource_tq6mo"]
+[sub_resource type="Resource" id="Resource_6bsue"]
 script = ExtResource("4_6bsue")
-name = "Attack Speed"
-stat_id = &"attack_speed"
-value = 1.0
+name = "Attack Rate"
+stat_id = &"attack_rate"
 metadata/_custom_type_script = "uid://cbxu2cfwgpjwg"
 
 [node name="PrefabBaseEnemy" type="Area2D" unique_id=532828671 node_paths=PackedStringArray("movement", "stats", "unit_sprite", "attack")]
@@ -39,7 +38,7 @@ shape = SubResource("RectangleShape2D_xhd5l")
 
 [node name="Attack" type="Node" parent="." unique_id=1785878817]
 script = ExtResource("4_7wuab")
-attack_speed_stat_template = SubResource("Resource_tq6mo")
+attack_rate_stat_template = SubResource("Resource_6bsue")
 metadata/_custom_type_script = "uid://dx787c60s4yjx"
 
 [node name="EnemyMovement" type="Node" parent="." unique_id=752472774]

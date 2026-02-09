@@ -22,7 +22,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == MouseButton.MOUSE_BUTTON_LEFT:
 			var mouse_pos : Vector2 = grid_view.get_global_mouse_position()
-			GridServer.place_unit_on_mouse_tile(mouse_pos, MELEE_UNIT.instantiate() as Unit2D)
+			GridServer.place_unit_on_mouse_tile(mouse_pos, PREFAB_BASE_UNIT.instantiate() as Unit2D)
 		elif event.pressed and event.button_index == MouseButton.MOUSE_BUTTON_RIGHT:
 			var mouse_pos : Vector2 = grid_view.get_global_mouse_position()
 			#for i in range(100):

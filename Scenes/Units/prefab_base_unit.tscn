@@ -45,16 +45,9 @@ metadata/_custom_type_script = "uid://ett7q7dk3f8l"
 
 [sub_resource type="Resource" id="Resource_prmna"]
 script = ExtResource("14_n8srb")
-name = "Attack Speed"
-stat_id = &"attack_speed"
+name = "Attack Rate"
+stat_id = &"attack_rate"
 value = 1.0
-metadata/_custom_type_script = "uid://cbxu2cfwgpjwg"
-
-[sub_resource type="Resource" id="Resource_gk5nh"]
-script = ExtResource("14_n8srb")
-name = "Attack Damage"
-stat_id = &"attack_damage"
-value = 1000.0
 metadata/_custom_type_script = "uid://cbxu2cfwgpjwg"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_58nij"]
@@ -85,9 +78,8 @@ projectile_template = ExtResource("5_4bxgl")
 spawn_position_node = NodePath("../RayCast2D")
 scanner = NodePath("../Scanner2D")
 effects_templates = Array[ExtResource("6_8te2y")]([SubResource("Resource_ouxkb")])
-attack_speed_stat_template = SubResource("Resource_prmna")
+attack_rate_stat_template = SubResource("Resource_prmna")
 attack_timer = NodePath("AttackTimer")
-attack_damage_stat_template = SubResource("Resource_gk5nh")
 metadata/_custom_type_script = "uid://dx787c60s4yjx"
 
 [node name="AttackTimer" type="Timer" parent="Attack" unique_id=2036632767]

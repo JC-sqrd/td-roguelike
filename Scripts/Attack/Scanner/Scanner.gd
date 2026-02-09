@@ -16,6 +16,7 @@ func _physics_process(delta: float) -> void:
 		if is_colliding_current and not was_colliding:
 			was_colliding = true
 			collision = true
+			print("SCANNER COLLISION DETECTED")
 			collision_enter.emit()
 			return
 		elif not is_colliding_current and was_colliding:
