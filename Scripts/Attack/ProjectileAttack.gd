@@ -1,8 +1,8 @@
 class_name ProjectileAttack extends Attack
 
 
+@export var projectile_template : ProjectileTemplate
 @export var spawn_position_node : Node2D
-@export var projectile_texture : Texture2D
 
 var projectiles : Array[Projectile]
 
@@ -13,7 +13,10 @@ func _ready() -> void:
 	attack_timer.timeout.connect(_on_attack_timer_timeout)
 
 func start_attack():
-	create_projectile()
+	projectile_template.spawn_position = spawn_position_node.global_position
+	var projectile : Projectile = projectile_template.build_projectile(canvas_item)
+	projectile.effects = effects
+	ProjectileServer.add_projectile(projectile)
 	end_attack()
 	pass
 
@@ -73,24 +76,4 @@ func _on_scanner_collision_exit():
 
 func _on_attack_timer_timeout():
 	start_attack()
-	pass
-
-func create_projectile():
-	var projectile : Projectile = Projectile.new(PhysicsServer2D.body_create(), PhysicsServer2D.circle_shape_create(), RenderingServer.canvas_item_create(), canvas_item, projectile_texture, spawn_position_node.global_position)
-	#Physics
-	projectile.set_lifettime(10)
-	projectile.set_speed(400)
-	projectile.set_direction(Vector2(1,0))
-	projectile.set_position(spawn_position_node.global_position)
-	PhysicsServer2D.shape_set_data(projectile.shape, 32)
-	projectile.set_body_mode(PhysicsServer2D.BODY_MODE_KINEMATIC).set_body_space(canvas_item.get_world_2d().space)
-	projectile.set_body_collision_layer(0)
-	projectile.set_body_collision_mask(2)
-	#Render
-	RenderingServer.canvas_item_set_z_index(projectile.canvas_item_rid, 10)
-	projectile.draw_projectile()
-	#Effect
-	projectile.effects = effects
-	
-	ProjectileServer.add_projectile(projectile)
 	pass

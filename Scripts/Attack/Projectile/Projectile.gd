@@ -30,18 +30,21 @@ func _init(body : RID, shape : RID,canvas_item_rid : RID, parent_canvas_item : C
 	#RenderingServer.canvas_item_set_parent(canvas_item_rid, parent_canvas_item.get_tree().root.get_viewport_rid())
 	pass
 
-func create_projectile(params : CreateProjectileParams) -> Projectile:
+
+static func create_projectile(params : CreateProjectileParams) -> Projectile:
 	var projectile : Projectile = Projectile.new(PhysicsServer2D.body_create(), params.shape, RenderingServer.canvas_item_create(), params.canvas_item, params.texture, params.position)
 	#Physics
 	projectile.set_lifettime(params.lifetime)
 	projectile.set_speed(params.speed)
-	projectile.set_direction(params.position)
-	projectile.set_position(params.position)
+	projectile.set_direction(params.direction)
+	#projectile.set_position(params.position)
+	projectile.set_parent_canvas_item(params.canvas_item)
 	PhysicsServer2D.shape_set_data(projectile.shape, params.shape_data)
-	projectile.set_body_mode(PhysicsServer2D.BODY_MODE_KINEMATIC).set_body_space(parent_canvas_item.get_world_2d().space)
-	projectile.set_body_collision_layer(0)
-	projectile.set_body_collision_mask(2)
+	projectile.set_body_mode(PhysicsServer2D.BODY_MODE_KINEMATIC).set_body_space(params.canvas_item.get_world_2d().space)
+	projectile.set_body_collision_layer(params.collision_layer)
+	projectile.set_body_collision_mask(params.collision_mask)
 	#Render
+	RenderingServer.canvas_item_set_z_index(projectile.canvas_item_rid, 10)
 	projectile.draw_projectile()
 	return projectile
 
@@ -65,6 +68,10 @@ func set_direction(direction : Vector2):
 
 func set_lifettime(lifetime : float):
 	self.lifetime = lifetime
+	pass
+
+func set_parent_canvas_item(canvas_item : CanvasItem):
+	self.parent_canvas_item = canvas_item
 	pass
 
 func draw_projectile():
@@ -102,7 +109,7 @@ func set_canvas_item_parent(canvas_item : CanvasItem):
 	RenderingServer.canvas_item_set_parent(canvas_item_rid, canvas_item.get_canvas())
 	pass
 
-func simulate_projectiles(delta : float, callback_func : Callable):
+func simulate_projectile(delta : float, callback_func : Callable):
 	velocity = Vector2(direction.x * speed * delta, direction.y * speed * delta)
 	position += velocity
 	var transform : Transform2D = Transform2D(0, position)

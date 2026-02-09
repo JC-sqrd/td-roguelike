@@ -3,24 +3,19 @@ extends Node
 
 var projectiles : Array[Projectile]
 
-
 func _ready() -> void:
 	#z_index = 1
 	pass
-
 
 func _physics_process(delta: float) -> void:
 	if projectiles.size() == 0:
 		return
 	
 	for p in projectiles:
-		p.simulate_projectiles(delta, remove_projectile)
-	
-	#simulate_projectiles(delta)
+		p.simulate_projectile(delta, remove_projectile)
 	
 	print("TOTAL PROJECTILES: " + str(projectiles.size()))
 	pass
-
 
 func add_projectile(projectile : Projectile):
 	projectiles.append(projectile)

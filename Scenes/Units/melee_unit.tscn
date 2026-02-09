@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://2hunufhpa86t"]
+
+[ext_resource type="Script" uid="uid://cgweddqijr87x" path="res://Scripts/Unit/Unit2D.gd" id="1_ofjnw"]
+[ext_resource type="Texture2D" uid="uid://d1lp28kme3fke" path="res://Placeholders/Sprites/Character_Front.png" id="2_3vfox"]
+[ext_resource type="Script" uid="uid://bwluoofyu0fhe" path="res://Scripts/Stat/Stats.gd" id="3_uxgpd"]
+[ext_resource type="Resource" uid="uid://d3r2ucqmlvmci" path="res://Resources/UnitStatsTemplates/stats_test_unit.tres" id="4_xp5w7"]
+[ext_resource type="Script" uid="uid://g3tqyp6eubwp" path="res://Scripts/Attack/MeleeAttack.gd" id="5_hur62"]
+[ext_resource type="Script" uid="uid://cxrtec2mkmkwa" path="res://Scripts/Attack/Scanner/Scanner.gd" id="6_6kp07"]
+[ext_resource type="Script" uid="uid://cbxu2cfwgpjwg" path="res://Scripts/Stat/StatTemplate.gd" id="7_5jekv"]
+[ext_resource type="Script" uid="uid://b7vrud1ewt7fv" path="res://Scripts/Attack/Scanner/ScannerRayCast2D.gd" id="7_62wgn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vfox"]
+size = Vector2(128, 128)
+
+[sub_resource type="Resource" id="Resource_uiym3"]
+script = ExtResource("7_5jekv")
+name = "Attack Speed"
+stat_id = &"attack_speed"
+value = 1.0
+metadata/_custom_type_script = "uid://cbxu2cfwgpjwg"
+
+[sub_resource type="Resource" id="Resource_me1lg"]
+script = ExtResource("7_5jekv")
+name = "Attack Damage"
+stat_id = &"attack_damage"
+value = 25.0
+metadata/_custom_type_script = "uid://cbxu2cfwgpjwg"
+
+[node name="MeleeUnit" type="Area2D" unique_id=1011832565 node_paths=PackedStringArray("stats", "unit_sprite", "attack")]
+script = ExtResource("1_ofjnw")
+stats = NodePath("Stats")
+unit_sprite = NodePath("Sprite2D")
+attack = NodePath("Attack")
+metadata/_custom_type_script = "uid://cgweddqijr87x"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=400991827]
+position = Vector2(0, -64)
+shape = SubResource("RectangleShape2D_3vfox")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2094212841]
+modulate = Color(0.28235295, 0.80784315, 0.8392157, 1)
+texture_filter = 1
+position = Vector2(0, -64)
+texture = ExtResource("2_3vfox")
+
+[node name="ScannerRayCast2D" type="RayCast2D" parent="." unique_id=975616008]
+position = Vector2(0, -64)
+target_position = Vector2(192, 0)
+script = ExtResource("7_62wgn")
+metadata/_custom_type_script = "uid://b7vrud1ewt7fv"
+
+[node name="Stats" type="Node" parent="." unique_id=283566115]
+script = ExtResource("3_uxgpd")
+stats_template = ExtResource("4_xp5w7")
+metadata/_custom_type_script = "uid://bwluoofyu0fhe"
+
+[node name="Attack" type="Node" parent="." unique_id=994382061 node_paths=PackedStringArray("scanner", "attack_timer")]
+script = ExtResource("5_hur62")
+scanner = NodePath("../Scanner2D")
+attack_speed_stat_template = SubResource("Resource_uiym3")
+attack_timer = NodePath("AttackTimer")
+attack_damage_stat_template = SubResource("Resource_me1lg")
+metadata/_custom_type_script = "uid://g3tqyp6eubwp"
+
+[node name="AttackTimer" type="Timer" parent="Attack" unique_id=95477945]
+
+[node name="Scanner2D" type="Node" parent="." unique_id=2115370767 node_paths=PackedStringArray("ray_casts")]
+script = ExtResource("6_6kp07")
+ray_casts = [NodePath("../ScannerRayCast2D")]
+metadata/_custom_type_script = "uid://cxrtec2mkmkwa"

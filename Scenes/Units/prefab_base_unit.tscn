@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cgweddqijr87x" path="res://Scripts/Unit/Unit2D.gd" id="1_geiwp"]
 [ext_resource type="Texture2D" uid="uid://d1lp28kme3fke" path="res://Placeholders/Sprites/Character_Front.png" id="3_58nij"]
 [ext_resource type="Script" uid="uid://cxrtec2mkmkwa" path="res://Scripts/Attack/Scanner/Scanner.gd" id="4_j3cu2"]
+[ext_resource type="Resource" uid="uid://u8qjlnk57elf" path="res://Resources/ProjectileTemplates/fast_projectile_template.tres" id="5_4bxgl"]
 [ext_resource type="Script" uid="uid://bj80inxdbmrak" path="res://Scripts/Attack/ProjectileAttack.gd" id="5_58nij"]
 [ext_resource type="Script" uid="uid://rq6t2ktj4pbf" path="res://Scripts/Effect/Templates/EffectTemplate.gd" id="6_8te2y"]
 [ext_resource type="Script" uid="uid://yxewk2f711vu" path="res://Scripts/StatModifiers/Templates/FlatStatModifierTemplate.gd" id="7_ma03g"]
@@ -13,7 +14,6 @@
 [ext_resource type="Script" uid="uid://co4kd31ygill5" path="res://Scripts/StatModifiers/ValueProvider/BonusValue/ActorStatBonusValue.gd" id="10_prmna"]
 [ext_resource type="Script" uid="uid://cnngi3m1507r7" path="res://Scripts/StatModifiers/Templates/OverrideStatModifierTemplate.gd" id="11_6d1bv"]
 [ext_resource type="Script" uid="uid://ett7q7dk3f8l" path="res://Scripts/Effect/Templates/InstantEffectTemplate.gd" id="12_prmna"]
-[ext_resource type="Texture2D" uid="uid://d10osc5j0bcnt" path="res://Placeholders/Sprites/Fireball.png" id="13_ma03g"]
 [ext_resource type="Script" uid="uid://b7vrud1ewt7fv" path="res://Scripts/Attack/Scanner/ScannerRayCast2D.gd" id="14_ewnxi"]
 [ext_resource type="Script" uid="uid://cbxu2cfwgpjwg" path="res://Scripts/Stat/StatTemplate.gd" id="14_n8srb"]
 [ext_resource type="Script" uid="uid://bwluoofyu0fhe" path="res://Scripts/Stat/Stats.gd" id="17_6d1bv"]
@@ -27,6 +27,7 @@ metadata/_custom_type_script = "uid://co4kd31ygill5"
 
 [sub_resource type="Resource" id="Resource_vxd83"]
 script = ExtResource("9_n8srb")
+value = 50.0
 bonus_values = Array[ExtResource("8_6d1bv")]([SubResource("Resource_4bxgl")])
 metadata/_custom_type_script = "uid://biebgrl65lhdp"
 
@@ -80,8 +81,8 @@ metadata/_custom_type_script = "uid://cxrtec2mkmkwa"
 
 [node name="Attack" type="Node" parent="." unique_id=2138320614 node_paths=PackedStringArray("spawn_position_node", "scanner", "attack_timer")]
 script = ExtResource("5_58nij")
+projectile_template = ExtResource("5_4bxgl")
 spawn_position_node = NodePath("../RayCast2D")
-projectile_texture = ExtResource("13_ma03g")
 scanner = NodePath("../Scanner2D")
 effects_templates = Array[ExtResource("6_8te2y")]([SubResource("Resource_ouxkb")])
 attack_speed_stat_template = SubResource("Resource_prmna")

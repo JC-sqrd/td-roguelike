@@ -13,6 +13,7 @@ func initialize(grid_data : GridData, grid_view : Grid):
 
 const PREFAB_BASE_UNIT = preload("uid://wk226ka6adsl")
 const PREFAB_BASE_ENEMY = preload("uid://cjmpcvq57n4k6")
+const MELEE_UNIT = preload("uid://2hunufhpa86t")
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -21,7 +22,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == MouseButton.MOUSE_BUTTON_LEFT:
 			var mouse_pos : Vector2 = grid_view.get_global_mouse_position()
-			GridServer.place_unit_on_mouse_tile(mouse_pos, PREFAB_BASE_UNIT.instantiate() as Unit2D)
+			GridServer.place_unit_on_mouse_tile(mouse_pos, MELEE_UNIT.instantiate() as Unit2D)
 		elif event.pressed and event.button_index == MouseButton.MOUSE_BUTTON_RIGHT:
 			var mouse_pos : Vector2 = grid_view.get_global_mouse_position()
 			#for i in range(100):
