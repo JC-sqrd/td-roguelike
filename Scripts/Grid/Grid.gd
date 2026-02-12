@@ -61,7 +61,6 @@ func generate_model_from_tile_map(tile_map_layer : TileMapLayer) -> GridData:
 	grid_data.grid = grid
 	return grid_data
 
-
 func _on_unit_placed_on_tile_model(unit : Unit2D, tile_model : TileModel):
 	print("PLACED UNIT ON TILE " + str(tile_model.tile_index))
 	unit.global_position = tile_model.tile_global_pos

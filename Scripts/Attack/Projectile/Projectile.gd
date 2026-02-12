@@ -1,5 +1,6 @@
 class_name Projectile extends RefCounted
 
+var owner : Variant
 var parent_canvas_item : CanvasItem
 var canvas_item_rid : RID
 var body : RID
@@ -33,16 +34,19 @@ func _init(body : RID, shape : RID,canvas_item_rid : RID, parent_canvas_item : C
 
 static func create_projectile(params : CreateProjectileParams) -> Projectile:
 	var projectile : Projectile = Projectile.new(PhysicsServer2D.body_create(), params.shape, RenderingServer.canvas_item_create(), params.canvas_item, params.texture, params.position)
-	#Physics
+	#Projectile
 	projectile.set_lifettime(params.lifetime)
 	projectile.set_speed(params.speed)
 	projectile.set_direction(params.direction)
+	projectile.set_owner(params.owner)
 	#projectile.set_position(params.position)
 	projectile.set_parent_canvas_item(params.canvas_item)
+	#Physics
 	PhysicsServer2D.shape_set_data(projectile.shape, params.shape_data)
-	projectile.set_body_mode(PhysicsServer2D.BODY_MODE_KINEMATIC).set_body_space(params.canvas_item.get_world_2d().space)
-	projectile.set_body_collision_layer(params.collision_layer)
-	projectile.set_body_collision_mask(params.collision_mask)
+	PhysicsServer2D.body_set_mode(projectile.body, PhysicsServer2D.BODY_MODE_KINEMATIC)
+	PhysicsServer2D.body_set_space(projectile.body, params.canvas_item.get_world_2d().space)
+	PhysicsServer2D.body_set_collision_layer(projectile.body, params.collision_layer)
+	PhysicsServer2D.body_set_collision_mask(projectile.body, params.collision_mask)
 	#Render
 	RenderingServer.canvas_item_set_z_index(projectile.canvas_item_rid, 10)
 	projectile.draw_projectile()
@@ -53,6 +57,9 @@ func add_lifetime_counter(delta : float) -> bool:
 	if _lifetime_counter >= lifetime:
 		return true
 	return false
+
+func set_owner(owner : Variant):
+	self.owner = owner
 
 func set_speed(speed : float):
 	self.speed = speed

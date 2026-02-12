@@ -1,5 +1,6 @@
 class_name CreateProjectileParams extends RefCounted
 
+var owner : Variant
 var lifetime : float = 0
 var position : Vector2 = Vector2(0,0)
 var texture : Texture2D

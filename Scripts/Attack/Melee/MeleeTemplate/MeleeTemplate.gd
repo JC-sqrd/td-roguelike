@@ -20,4 +20,4 @@ func build_melee(parent_canvas_item : CanvasItem) -> Melee:
 	params.collision_layer = collision_layer
 	params.collision_mask = collision_mask
 	params.position = position
-	return Melee.create_melee(params)
+	return null

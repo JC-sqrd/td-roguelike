@@ -25,80 +25,18 @@ func _ready() -> void:
 
 func initialize(actor : Unit2D):
 	super(actor)
-	melee = melee_template.build_melee(canvas_item)
-	melee.position = actor.global_position
-	melee.effects = effects
-	#ms_per_frame = (anim_frames / anim_fps) / anim_fps
-	
-	#start_attack()
 	pass
 
 func start_attack():
 	active = true
-	current_frame += 1
-	print("MELEE ATTACK ACTIVATED")
-	pass
-
-func _process(delta: float) -> void:
-	#if !active:
-		#return
-	#
-	#second += delta
-	#step_counter += minf(delta, anim_step)
-	#
-	##print(delta)
-	##print(ms_per_frame)
-	#
-	#if step_counter >= anim_step:
-		#current_frame += 1
-		#step_counter = 0
-	#
-	#print(current_frame)
-	#
-	#if current_frame == anim_frames:
-		#active = false
-		#print("SECOND ELAPSED: " + str(second))
-		#current_frame = 0
-	#
-	#if second >= 1:
-		#active = false
-		#second = 0
 	pass
 
 func _physics_process(delta: float) -> void:
 	if !active:
 		return
-	
-	second += delta
-	step_counter += minf(delta, anim_step)
-	
-	#print(delta)
-	#print(ms_per_frame)
-	
-	if step_counter >= anim_step:
-		current_frame += 1
-		step_counter = 0
-	
-	print(current_frame)
-	
-	if active_frames.has(current_frame):
-		melee.simulate_attack(delta, melee_callback)
-		pass
-	
-	if current_frame == anim_frames:
-		active = false
-		melee.hit()
-		attack_timer.start(attack_rate_stat.get_value())
-		print("SECOND ELAPSED: " + str(second))
-		current_frame = 0
-	
-	if second >= 1:
-		active = false
-		second = 0
 	pass
 
 func end_attack():
-	
 	pass
 
 func _on_scanner_collision_enter():
