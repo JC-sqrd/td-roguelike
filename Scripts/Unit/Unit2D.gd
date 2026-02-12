@@ -37,13 +37,13 @@ func _ready() -> void:
 	health_manager = HealthManager.new(stats.get_stat("max_health"), stats.get_stat("current_health"))
 	health_manager.health_depleted.connect(_on_health_depleted)
 	
-	var damage_effect : InstantEffect = InstantEffect.new()
-	var damage_modifier : FlatStatModifier = FlatStatModifier.new("current_health",ValueProvider.new(50), FlatStatModifier.Mode.SUBTRACT)
-	var health_modifier : MultiplierStatModifier = MultiplierStatModifier.new("current_health", ValueProvider.new(-0.5))
+	#var damage_effect : InstantEffect = InstantEffect.new()
+	#var damage_modifier : FlatStatModifier = FlatStatModifier.new("current_health",ValueProvider.new(50), FlatStatModifier.Mode.SUBTRACT)
+	#var health_modifier : MultiplierStatModifier = MultiplierStatModifier.new("current_health", ValueProvider.new(-0.5))
 	
 	
-	damage_effect.add_modifier(damage_modifier)
-	damage_effect.add_modifier(health_modifier)
+	#damage_effect.add_modifier(damage_modifier)
+	#damage_effect.add_modifier(health_modifier)
 	
 	pass
 

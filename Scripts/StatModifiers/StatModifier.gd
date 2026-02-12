@@ -2,8 +2,8 @@
 class_name StatModifier extends RefCounted
 
 
-@export var stat_id : StringName
-@export var required_context : Array[ContextTag]
+var stat_id : StringName
+var required_context : Array[ContextTag]
 var value_provider : ValueProvider
 
 

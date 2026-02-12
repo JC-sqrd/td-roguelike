@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://daot3usdd4vjg" path="res://Scripts/Attack/Projectile/ProjectileTemplate/ProjectileTemplate.gd" id="1_84b1s"]
 [ext_resource type="Script" uid="uid://bf4parr32iqky" path="res://Scripts/Attack/Projectile/ProjectileTemplate/ProjectileShape/CircleProjectileShape.gd" id="2_fdq5b"]
-[ext_resource type="Texture2D" uid="uid://mew3rwhsktgm" path="res://Placeholders/Sprites/TilePlaceholder.png" id="3_84b1s"]
+[ext_resource type="Texture2D" uid="uid://c2hcj8fwsnhyi" path="res://Placeholders/Sprites/Placeholder-Projectile-Sprite.png" id="3_84b1s"]
 
 [sub_resource type="Resource" id="Resource_v4nkc"]
 script = ExtResource("2_fdq5b")
