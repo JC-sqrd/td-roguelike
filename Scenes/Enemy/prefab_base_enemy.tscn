@@ -43,7 +43,7 @@ metadata/_custom_type_script = "uid://dx787c60s4yjx"
 
 [node name="EnemyMovement" type="Node" parent="." unique_id=752472774]
 script = ExtResource("5_htpe8")
-speed = 50.0
+speed = 20.0
 metadata/_custom_type_script = "uid://cxjyo70m4kg8v"
 
 [node name="Stats" type="Node" parent="." unique_id=1913965504]

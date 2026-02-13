@@ -10,11 +10,14 @@ var texture : Texture2D
 var position : Vector2 = Vector2(0,0)
 var velocity : Vector2 = Vector2(0,0)
 var direction : Vector2 = Vector2(0,0)
+var pierce_count : int = 1
 var speed : float = 0
 var lifetime : float = 5
 var _lifetime_counter : float = 0
 
 var effects : Array[Effect]
+
+var hits : Array[RID]
 
 func _init(body : RID, shape : RID,canvas_item_rid : RID, parent_canvas_item : CanvasItem, texture : Texture2D,position : Vector2, speed : float = 0):
 	self.body = body
@@ -133,13 +136,21 @@ func simulate_projectile(delta : float, callback_func : Callable):
 	params.collide_with_bodies = false
 	params.collision_mask = 2
 	
-	var results = space_state.intersect_shape(params)
+	var results : Array[Dictionary] = space_state.intersect_shape(params)
 	for result in results:
 		var area_rid : RID = result.rid
+		if hits.has(area_rid):
+			continue
+		
 		for effect in effects:
 			EffectServer.receive_effect(area_rid, effect, {})
-		callback_func.call(self)
-		destroy_projectile()
+		
+		pierce_count -= 1
+		
+		if pierce_count <= 0:
+			callback_func.call(self)
+			destroy_projectile()
+		hits.append(area_rid)
 		
 	if add_lifetime_counter(delta):
 		callback_func.call(self)

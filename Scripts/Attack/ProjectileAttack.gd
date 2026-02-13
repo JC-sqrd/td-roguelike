@@ -1,6 +1,6 @@
 class_name ProjectileAttack extends Attack
 
-
+@export_flags_2d_physics var projectile_coll_mask : int
 @export var projectile_template : ProjectileTemplate
 @export var spawn_position_node : Node2D
 
@@ -15,6 +15,7 @@ func _ready() -> void:
 func start_attack():
 	projectile_template.spawn_position = spawn_position_node.global_position
 	var projectile : Projectile = projectile_template.build_projectile(canvas_item)
+	projectile.set_body_collision_mask(projectile_coll_mask)
 	projectile.effects = effects
 	ProjectileServer.add_projectile(projectile)
 	end_attack()
@@ -67,6 +68,7 @@ func simulate_projectiles(delta : float):
 		pass
 
 func _on_scanner_collision_enter():
+	start_attack()
 	attack_timer.start(attack_rate_stat.get_value())
 	pass
 

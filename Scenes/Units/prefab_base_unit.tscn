@@ -10,23 +10,17 @@
 [ext_resource type="Script" uid="uid://h5q0xghe0ry1" path="res://Scripts/StatModifiers/ValueProvider/BonusValue/BonusValue.gd" id="8_6d1bv"]
 [ext_resource type="Script" uid="uid://bvlmo7eyi5nvi" path="res://Scripts/ContextTag/ContextTag.gd" id="8_ewnxi"]
 [ext_resource type="Script" uid="uid://biebgrl65lhdp" path="res://Scripts/StatModifiers/ValueProvider/Templates/ValueProviderTemplate.gd" id="9_n8srb"]
-[ext_resource type="Script" uid="uid://co4kd31ygill5" path="res://Scripts/StatModifiers/ValueProvider/BonusValue/ActorStatBonusValue.gd" id="10_prmna"]
 [ext_resource type="Script" uid="uid://ett7q7dk3f8l" path="res://Scripts/Effect/Templates/InstantEffectTemplate.gd" id="12_prmna"]
 [ext_resource type="Script" uid="uid://b7vrud1ewt7fv" path="res://Scripts/Attack/Scanner/ScannerRayCast2D.gd" id="14_ewnxi"]
 [ext_resource type="Script" uid="uid://cbxu2cfwgpjwg" path="res://Scripts/Stat/StatTemplate.gd" id="14_n8srb"]
+[ext_resource type="Script" uid="uid://wrvmnol78qg7" path="res://Scripts/Ability/AbilityController.gd" id="16_gk5nh"]
 [ext_resource type="Script" uid="uid://bwluoofyu0fhe" path="res://Scripts/Stat/Stats.gd" id="17_6d1bv"]
+[ext_resource type="Script" uid="uid://cj4mrt1ckacof" path="res://Scripts/Ability/ActiveAbility.gd" id="17_prmna"]
 [ext_resource type="Resource" uid="uid://d3r2ucqmlvmci" path="res://Resources/UnitStatsTemplates/stats_test_unit.tres" id="18_prmna"]
-
-[sub_resource type="Resource" id="Resource_6d1bv"]
-script = ExtResource("10_prmna")
-stat_id = &"current_health"
-scale_ratio = 2.0
-metadata/_custom_type_script = "uid://co4kd31ygill5"
 
 [sub_resource type="Resource" id="Resource_n8srb"]
 script = ExtResource("9_n8srb")
-value = 125.0
-bonus_values = Array[ExtResource("8_6d1bv")]([SubResource("Resource_6d1bv")])
+value = 20.0
 metadata/_custom_type_script = "uid://biebgrl65lhdp"
 
 [sub_resource type="Resource" id="Resource_gk5nh"]
@@ -45,7 +39,7 @@ metadata/_custom_type_script = "uid://ett7q7dk3f8l"
 script = ExtResource("14_n8srb")
 name = "Attack Rate"
 stat_id = &"attack_rate"
-value = 1.0
+value = 3.0
 metadata/_custom_type_script = "uid://cbxu2cfwgpjwg"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_58nij"]
@@ -102,3 +96,14 @@ metadata/_custom_type_script = "uid://bwluoofyu0fhe"
 [node name="AttackPos" type="Marker2D" parent="." unique_id=1500609088]
 position = Vector2(0, -93)
 gizmo_extents = 20.0
+
+[node name="AbilityController" type="Node" parent="." unique_id=243434454 node_paths=PackedStringArray("stats")]
+script = ExtResource("16_gk5nh")
+stats = NodePath("../Stats")
+metadata/_custom_type_script = "uid://wrvmnol78qg7"
+
+[node name="ActiveAbility" type="Node" parent="AbilityController" unique_id=1148740025]
+script = ExtResource("17_prmna")
+ability_id = &"power_shot"
+ability_name = "Power Shot"
+metadata/_custom_type_script = "uid://cj4mrt1ckacof"
