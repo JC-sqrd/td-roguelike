@@ -5,7 +5,7 @@ class_name Unit2D extends Area2D
 @export var stats : Stats
 @export var unit_sprite : Sprite2D
 @export var attack : Attack
-
+@export var ability_controller : AbilityController
 
 
 var unit_data : UnitData
@@ -33,18 +33,13 @@ func _ready() -> void:
 	#Register effect listener to effect server
 	EffectServer.register_effect_listener(get_rid(), effect_listener)
 	
-	#Initialize health manager
+	#Initialize HealthManager
 	health_manager = HealthManager.new(stats.get_stat("max_health"), stats.get_stat("current_health"))
 	health_manager.health_depleted.connect(_on_health_depleted)
 	
-	#var damage_effect : InstantEffect = InstantEffect.new()
-	#var damage_modifier : FlatStatModifier = FlatStatModifier.new("current_health",ValueProvider.new(50), FlatStatModifier.Mode.SUBTRACT)
-	#var health_modifier : MultiplierStatModifier = MultiplierStatModifier.new("current_health", ValueProvider.new(-0.5))
-	
-	
-	#damage_effect.add_modifier(damage_modifier)
-	#damage_effect.add_modifier(health_modifier)
-	
+	#Initialize AbilityController
+	var ability_controller_args : Dictionary = {"actor":self}
+	ability_controller.initialize(stats, {"actor" : self}, ability_controller_args)
 	pass
 
 

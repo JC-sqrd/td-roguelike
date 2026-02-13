@@ -8,11 +8,11 @@ class_name Ability extends Node
 
 @export_multiline() var ability_details : String
 
-@abstract func activate(stats : Stats, context : Dictionary)
+@abstract func activate(stats : Stats, context : Dictionary[StringName,Variant], args : Dictionary = {})
 
 @abstract func deactivate()
 
-@abstract func start_ability(stats : Stats, context : Dictionary)
+@abstract func start_ability(stats : Stats, context : Dictionary[StringName,Variant])
 
 @abstract func end_ability()
 

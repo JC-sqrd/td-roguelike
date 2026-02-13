@@ -15,8 +15,11 @@
 [ext_resource type="Script" uid="uid://cbxu2cfwgpjwg" path="res://Scripts/Stat/StatTemplate.gd" id="14_n8srb"]
 [ext_resource type="Script" uid="uid://wrvmnol78qg7" path="res://Scripts/Ability/AbilityController.gd" id="16_gk5nh"]
 [ext_resource type="Script" uid="uid://bwluoofyu0fhe" path="res://Scripts/Stat/Stats.gd" id="17_6d1bv"]
-[ext_resource type="Script" uid="uid://cj4mrt1ckacof" path="res://Scripts/Ability/ActiveAbility.gd" id="17_prmna"]
+[ext_resource type="Script" uid="uid://dori58efslgh0" path="res://Scripts/Ability/ActiveAbilities/AbilityPowerShot.gd" id="17_prmna"]
+[ext_resource type="Script" uid="uid://daot3usdd4vjg" path="res://Scripts/Attack/Projectile/ProjectileTemplate/ProjectileTemplate.gd" id="18_4bxgl"]
 [ext_resource type="Resource" uid="uid://d3r2ucqmlvmci" path="res://Resources/UnitStatsTemplates/stats_test_unit.tres" id="18_prmna"]
+[ext_resource type="Script" uid="uid://bf4parr32iqky" path="res://Scripts/Attack/Projectile/ProjectileTemplate/ProjectileShape/CircleProjectileShape.gd" id="19_vxd83"]
+[ext_resource type="Texture2D" uid="uid://d2xxkv4vdq1wj" path="res://Placeholders/Sprites/Placeholder Projectile.png" id="20_vxd83"]
 
 [sub_resource type="Resource" id="Resource_n8srb"]
 script = ExtResource("9_n8srb")
@@ -45,7 +48,37 @@ metadata/_custom_type_script = "uid://cbxu2cfwgpjwg"
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_58nij"]
 size = Vector2(128, 128)
 
-[node name="PrefabBaseUnit" type="Area2D" unique_id=1989289329 node_paths=PackedStringArray("stats", "unit_sprite", "attack")]
+[sub_resource type="Resource" id="Resource_t0del"]
+script = ExtResource("19_vxd83")
+radius = 32.0
+metadata/_custom_type_script = "uid://bf4parr32iqky"
+
+[sub_resource type="Resource" id="Resource_7bjww"]
+script = ExtResource("18_4bxgl")
+shape = SubResource("Resource_t0del")
+texture = ExtResource("20_vxd83")
+speed = 600.0
+collision_mask = 2
+metadata/_custom_type_script = "uid://daot3usdd4vjg"
+
+[sub_resource type="Resource" id="Resource_vxd83"]
+script = ExtResource("9_n8srb")
+value = 30.0
+metadata/_custom_type_script = "uid://biebgrl65lhdp"
+
+[sub_resource type="Resource" id="Resource_6aw13"]
+script = ExtResource("7_8te2y")
+mode = -1
+stat_id = &"current_health"
+value_provider_template = SubResource("Resource_vxd83")
+metadata/_custom_type_script = "uid://c58d5uuvecjfb"
+
+[sub_resource type="Resource" id="Resource_111n2"]
+script = ExtResource("12_prmna")
+flat_mutator_templates = Array[ExtResource("7_8te2y")]([SubResource("Resource_6aw13")])
+metadata/_custom_type_script = "uid://ett7q7dk3f8l"
+
+[node name="PrefabBaseUnit" type="Area2D" unique_id=1989289329 node_paths=PackedStringArray("stats", "unit_sprite", "attack", "ability_controller")]
 z_index = 1
 texture_filter = 1
 collision_mask = 0
@@ -54,6 +87,7 @@ script = ExtResource("1_geiwp")
 stats = NodePath("Stats")
 unit_sprite = NodePath("Sprite2D")
 attack = NodePath("Attack")
+ability_controller = NodePath("AbilityController")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=43116825]
 position = Vector2(0, -64)
@@ -97,13 +131,19 @@ metadata/_custom_type_script = "uid://bwluoofyu0fhe"
 position = Vector2(0, -93)
 gizmo_extents = 20.0
 
-[node name="AbilityController" type="Node" parent="." unique_id=243434454 node_paths=PackedStringArray("stats")]
+[node name="AbilityController" type="Node" parent="." unique_id=243434454 node_paths=PackedStringArray("ability")]
 script = ExtResource("16_gk5nh")
-stats = NodePath("../Stats")
+ability = NodePath("AbilityPowerShot")
 metadata/_custom_type_script = "uid://wrvmnol78qg7"
 
-[node name="ActiveAbility" type="Node" parent="AbilityController" unique_id=1148740025]
+[node name="AbilityPowerShot" type="Node" parent="AbilityController" unique_id=1148740025 node_paths=PackedStringArray("spawn_position")]
 script = ExtResource("17_prmna")
+projectile_template = SubResource("Resource_7bjww")
+effect_template = SubResource("Resource_111n2")
+spawn_position = NodePath("../../AttackPos")
+pierce = 4
+coll_layer = 1
+coll_mask = 2
 ability_id = &"power_shot"
 ability_name = "Power Shot"
 metadata/_custom_type_script = "uid://cj4mrt1ckacof"

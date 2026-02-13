@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://bwluoofyu0fhe" path="res://Scripts/Stat/Stats.gd" id="5_7dsm4"]
 [ext_resource type="Script" uid="uid://cxjyo70m4kg8v" path="res://Scripts/Movement/EnemyMovement.gd" id="5_htpe8"]
 [ext_resource type="Resource" uid="uid://cotnxkja5h153" path="res://Resources/UnitStatsTemplates/stats_test_enemy.tres" id="6_6bsue"]
+[ext_resource type="Script" uid="uid://wrvmnol78qg7" path="res://Scripts/Ability/AbilityController.gd" id="8_b0whd"]
+[ext_resource type="Script" uid="uid://cj4mrt1ckacof" path="res://Scripts/Ability/ActiveAbility.gd" id="9_x6vwj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xhd5l"]
 size = Vector2(128, 128)
@@ -17,7 +19,7 @@ name = "Attack Rate"
 stat_id = &"attack_rate"
 metadata/_custom_type_script = "uid://cbxu2cfwgpjwg"
 
-[node name="PrefabBaseEnemy" type="Area2D" unique_id=532828671 node_paths=PackedStringArray("movement", "stats", "unit_sprite", "attack")]
+[node name="PrefabBaseEnemy" type="Area2D" unique_id=532828671 node_paths=PackedStringArray("movement", "stats", "unit_sprite", "attack", "ability_controller")]
 collision_layer = 2
 collision_mask = 0
 monitoring = false
@@ -26,6 +28,7 @@ movement = NodePath("EnemyMovement")
 stats = NodePath("Stats")
 unit_sprite = NodePath("Sprite2D")
 attack = NodePath("Attack")
+ability_controller = NodePath("AbilityController")
 metadata/_custom_type_script = "uid://cgweddqijr87x"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=628924977]
@@ -50,3 +53,12 @@ metadata/_custom_type_script = "uid://cxjyo70m4kg8v"
 script = ExtResource("5_7dsm4")
 stats_template = ExtResource("6_6bsue")
 metadata/_custom_type_script = "uid://bwluoofyu0fhe"
+
+[node name="AbilityController" type="Node" parent="." unique_id=1241676151 node_paths=PackedStringArray("ability")]
+script = ExtResource("8_b0whd")
+ability = NodePath("ActiveAbility")
+metadata/_custom_type_script = "uid://wrvmnol78qg7"
+
+[node name="ActiveAbility" type="Node" parent="AbilityController" unique_id=2008379666]
+script = ExtResource("9_x6vwj")
+metadata/_custom_type_script = "uid://cj4mrt1ckacof"
