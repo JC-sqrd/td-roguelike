@@ -38,11 +38,11 @@ script = ExtResource("12_prmna")
 flat_mutator_templates = Array[ExtResource("7_8te2y")]([SubResource("Resource_gk5nh")])
 metadata/_custom_type_script = "uid://ett7q7dk3f8l"
 
-[sub_resource type="Resource" id="Resource_prmna"]
+[sub_resource type="Resource" id="Resource_2l08a"]
 script = ExtResource("14_n8srb")
-name = "Attack Rate"
-stat_id = &"attack_rate"
-value = 3.0
+name = "Attack Speed"
+stat_id = &"attack_speed"
+value = 1.0
 metadata/_custom_type_script = "uid://cbxu2cfwgpjwg"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_58nij"]
@@ -98,13 +98,13 @@ script = ExtResource("4_j3cu2")
 ray_casts = [NodePath("../RayCast2D")]
 metadata/_custom_type_script = "uid://cxrtec2mkmkwa"
 
-[node name="Attack" type="Node" parent="." unique_id=2138320614 node_paths=PackedStringArray("spawn_position_node", "scanner", "attack_timer")]
+[node name="Attack" type="Node" parent="." unique_id=2138320614 node_paths=PackedStringArray("scanner", "spawn_position_node", "attack_timer")]
 script = ExtResource("5_58nij")
+scanner = NodePath("../Scanner2D")
 projectile_template = ExtResource("5_4bxgl")
 spawn_position_node = NodePath("../AttackPos")
-scanner = NodePath("../Scanner2D")
 effects_templates = Array[ExtResource("6_8te2y")]([SubResource("Resource_ouxkb")])
-attack_rate_stat_template = SubResource("Resource_prmna")
+attack_speed_stat_template = SubResource("Resource_2l08a")
 attack_timer = NodePath("AttackTimer")
 metadata/_custom_type_script = "uid://dx787c60s4yjx"
 
@@ -134,7 +134,6 @@ gizmo_extents = 20.0
 [node name="AbilityController" type="Node" parent="." unique_id=243434454 node_paths=PackedStringArray("ability")]
 script = ExtResource("16_gk5nh")
 ability = NodePath("AbilityPowerShot")
-metadata/_custom_type_script = "uid://wrvmnol78qg7"
 
 [node name="AbilityPowerShot" type="Node" parent="AbilityController" unique_id=1148740025 node_paths=PackedStringArray("spawn_position")]
 script = ExtResource("17_prmna")
@@ -146,4 +145,3 @@ coll_layer = 1
 coll_mask = 2
 ability_id = &"power_shot"
 ability_name = "Power Shot"
-metadata/_custom_type_script = "uid://cj4mrt1ckacof"

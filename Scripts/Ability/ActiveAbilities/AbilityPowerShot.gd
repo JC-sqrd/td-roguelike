@@ -4,6 +4,8 @@ extends ActiveAbility
 @export var effect_template : EffectTemplate
 @export var spawn_position : Node2D
 @export var pierce : int = 3
+
+
 @export_flags_2d_physics var coll_layer : int = 0
 @export_flags_2d_physics var coll_mask : int = 0
 

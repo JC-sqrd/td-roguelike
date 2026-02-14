@@ -1,6 +1,7 @@
 class_name ProjectileAttack extends Attack
 
 @export_flags_2d_physics var projectile_coll_mask : int
+@export var scanner : Scanner2D
 @export var projectile_template : ProjectileTemplate
 @export var spawn_position_node : Node2D
 
@@ -69,7 +70,7 @@ func simulate_projectiles(delta : float):
 
 func _on_scanner_collision_enter():
 	start_attack()
-	attack_timer.start(attack_rate_stat.get_value())
+	attack_timer.start(1 / attack_speed_stat.get_value())
 	pass
 
 func _on_scanner_collision_exit():

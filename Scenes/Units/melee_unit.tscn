@@ -2,22 +2,21 @@
 
 [ext_resource type="Script" uid="uid://cgweddqijr87x" path="res://Scripts/Unit/Unit2D.gd" id="1_ofjnw"]
 [ext_resource type="Texture2D" uid="uid://d1lp28kme3fke" path="res://Placeholders/Sprites/Character_Front.png" id="2_3vfox"]
+[ext_resource type="Script" uid="uid://cax8i3mtksvr5" path="res://Scripts/Attack/Melee/Melee.gd" id="2_bkvpy"]
 [ext_resource type="Script" uid="uid://bwluoofyu0fhe" path="res://Scripts/Stat/Stats.gd" id="3_uxgpd"]
 [ext_resource type="Resource" uid="uid://d3r2ucqmlvmci" path="res://Resources/UnitStatsTemplates/stats_test_unit.tres" id="4_xp5w7"]
 [ext_resource type="Script" uid="uid://g3tqyp6eubwp" path="res://Scripts/Attack/MeleeAttack.gd" id="5_hur62"]
-[ext_resource type="Script" uid="uid://cxrtec2mkmkwa" path="res://Scripts/Attack/Scanner/Scanner.gd" id="6_6kp07"]
 [ext_resource type="Script" uid="uid://cbxu2cfwgpjwg" path="res://Scripts/Stat/StatTemplate.gd" id="7_5jekv"]
-[ext_resource type="Script" uid="uid://b7vrud1ewt7fv" path="res://Scripts/Attack/Scanner/ScannerRayCast2D.gd" id="7_62wgn"]
 [ext_resource type="Script" uid="uid://cxgihn8no5760" path="res://Scripts/Attack/Melee/MeleeTemplate/MeleeTemplate.gd" id="7_uiym3"]
 [ext_resource type="Script" uid="uid://dd4um3m2dou6w" path="res://Scripts/Attack/Melee/MeleeTemplate/MeleeShape/RectangleMeleeShape.gd" id="8_3hejh"]
 [ext_resource type="Texture2D" uid="uid://qgjlnpdnd6tn" path="res://Placeholders/Sprites/FastEnemy_Front.png" id="9_150p1"]
 [ext_resource type="Script" uid="uid://rq6t2ktj4pbf" path="res://Scripts/Effect/Templates/EffectTemplate.gd" id="10_dfsfn"]
-[ext_resource type="Script" uid="uid://yxewk2f711vu" path="res://Scripts/StatModifiers/Templates/FlatStatModifierTemplate.gd" id="11_s0bs6"]
+[ext_resource type="Script" uid="uid://c58d5uuvecjfb" path="res://Scripts/StatMutators/Templates/FlatStatMutatorTemplate.gd" id="11_h6fpk"]
 [ext_resource type="Script" uid="uid://bvlmo7eyi5nvi" path="res://Scripts/ContextTag/ContextTag.gd" id="12_flsbn"]
 [ext_resource type="Script" uid="uid://h5q0xghe0ry1" path="res://Scripts/StatModifiers/ValueProvider/BonusValue/BonusValue.gd" id="13_heoxh"]
 [ext_resource type="Script" uid="uid://biebgrl65lhdp" path="res://Scripts/StatModifiers/ValueProvider/Templates/ValueProviderTemplate.gd" id="14_r0kol"]
-[ext_resource type="Script" uid="uid://ck25fp8ei7dte" path="res://Scripts/StatModifiers/Templates/MultiplierStatModifierTemplate.gd" id="15_8yfn4"]
-[ext_resource type="Script" uid="uid://cnngi3m1507r7" path="res://Scripts/StatModifiers/Templates/OverrideStatModifierTemplate.gd" id="16_ev4kc"]
+[ext_resource type="Script" uid="uid://wrvmnol78qg7" path="res://Scripts/Ability/AbilityController.gd" id="15_gqnp8"]
+[ext_resource type="Script" uid="uid://cj4mrt1ckacof" path="res://Scripts/Ability/ActiveAbility.gd" id="16_bkvpy"]
 [ext_resource type="Script" uid="uid://ett7q7dk3f8l" path="res://Scripts/Effect/Templates/InstantEffectTemplate.gd" id="17_u5qbr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3vfox"]
@@ -34,37 +33,41 @@ texture = ExtResource("9_150p1")
 collision_mask = 2
 metadata/_custom_type_script = "uid://cxgihn8no5760"
 
-[sub_resource type="Resource" id="Resource_h4fy8"]
+[sub_resource type="Resource" id="Resource_rutio"]
 script = ExtResource("14_r0kol")
-value = 90.0
+value = 100.0
 metadata/_custom_type_script = "uid://biebgrl65lhdp"
 
-[sub_resource type="Resource" id="Resource_b70jw"]
-script = ExtResource("11_s0bs6")
+[sub_resource type="Resource" id="Resource_dfsfn"]
+script = ExtResource("11_h6fpk")
 mode = -1
 stat_id = &"current_health"
-value_provider_template = SubResource("Resource_h4fy8")
-metadata/_custom_type_script = "uid://yxewk2f711vu"
+value_provider_template = SubResource("Resource_rutio")
+metadata/_custom_type_script = "uid://c58d5uuvecjfb"
 
 [sub_resource type="Resource" id="Resource_4i4a7"]
 script = ExtResource("17_u5qbr")
-flat_modifiers = Array[ExtResource("11_s0bs6")]([SubResource("Resource_b70jw")])
+flat_mutator_templates = Array[ExtResource("11_h6fpk")]([SubResource("Resource_dfsfn")])
 metadata/_custom_type_script = "uid://ett7q7dk3f8l"
 
-[sub_resource type="Resource" id="Resource_150p1"]
+[sub_resource type="Resource" id="Resource_s0bs6"]
 script = ExtResource("7_5jekv")
-name = "Attack Rate"
-stat_id = &"attack_rate"
-value = 1.2
+name = "Attack Speed"
+stat_id = &"attack_speed"
+value = 0.77
 metadata/_custom_type_script = "uid://cbxu2cfwgpjwg"
 
-[node name="MeleeUnit" type="Area2D" unique_id=1011832565 node_paths=PackedStringArray("stats", "unit_sprite", "attack")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bkvpy"]
+size = Vector2(128, 64)
+
+[node name="MeleeUnit" type="Area2D" unique_id=1011832565 node_paths=PackedStringArray("stats", "unit_sprite", "attack", "ability_controller")]
 collision_mask = 0
 monitoring = false
 script = ExtResource("1_ofjnw")
 stats = NodePath("Stats")
 unit_sprite = NodePath("Sprite2D")
 attack = NodePath("Attack")
+ability_controller = NodePath("AbilityController")
 metadata/_custom_type_script = "uid://cgweddqijr87x"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=400991827]
@@ -77,35 +80,42 @@ texture_filter = 1
 position = Vector2(0, -64)
 texture = ExtResource("2_3vfox")
 
-[node name="ScannerRayCast2D" type="RayCast2D" parent="." unique_id=975616008]
-position = Vector2(0, -64)
-target_position = Vector2(192, 0)
-collision_mask = 2
-collide_with_areas = true
-collide_with_bodies = false
-script = ExtResource("7_62wgn")
-metadata/_custom_type_script = "uid://b7vrud1ewt7fv"
-
 [node name="Stats" type="Node" parent="." unique_id=283566115]
 script = ExtResource("3_uxgpd")
 stats_template = ExtResource("4_xp5w7")
 metadata/_custom_type_script = "uid://bwluoofyu0fhe"
 
-[node name="Attack" type="Node" parent="." unique_id=994382061 node_paths=PackedStringArray("scanner", "attack_timer")]
+[node name="Attack" type="Node" parent="." unique_id=994382061 node_paths=PackedStringArray("melee", "attack_timer")]
 script = ExtResource("5_hur62")
 melee_template = SubResource("Resource_3hejh")
 anim_frames = 4
+melee = NodePath("../Melee")
 anim_step = 0.083
 active_frames = Array[int]([3, 4, 5])
-scanner = NodePath("../Scanner2D")
 effects_templates = Array[ExtResource("10_dfsfn")]([SubResource("Resource_4i4a7")])
-attack_rate_stat_template = SubResource("Resource_150p1")
+attack_speed_stat_template = SubResource("Resource_s0bs6")
 attack_timer = NodePath("AttackTimer")
 metadata/_custom_type_script = "uid://g3tqyp6eubwp"
 
 [node name="AttackTimer" type="Timer" parent="Attack" unique_id=95477945]
 
-[node name="Scanner2D" type="Node" parent="." unique_id=2115370767 node_paths=PackedStringArray("ray_casts")]
-script = ExtResource("6_6kp07")
-ray_casts = [NodePath("../ScannerRayCast2D")]
-metadata/_custom_type_script = "uid://cxrtec2mkmkwa"
+[node name="Melee" type="Area2D" parent="." unique_id=243069506]
+position = Vector2(128, -64)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("2_bkvpy")
+metadata/_custom_type_script = "uid://cax8i3mtksvr5"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Melee" unique_id=769742092]
+shape = SubResource("RectangleShape2D_bkvpy")
+debug_color = Color(0.66957814, 0.50996643, 0, 0.41960785)
+
+[node name="AbilityController" type="Node" parent="." unique_id=102196218 node_paths=PackedStringArray("ability")]
+script = ExtResource("15_gqnp8")
+ability = NodePath("ActiveAbility")
+metadata/_custom_type_script = "uid://wrvmnol78qg7"
+
+[node name="ActiveAbility" type="Node" parent="AbilityController" unique_id=316062809]
+script = ExtResource("16_bkvpy")
+metadata/_custom_type_script = "uid://cj4mrt1ckacof"
