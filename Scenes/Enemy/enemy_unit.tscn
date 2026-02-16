@@ -1,30 +1,30 @@
 [gd_scene format=3 uid="uid://cjmpcvq57n4k6"]
 
-[ext_resource type="Script" uid="uid://cw8502r5o4cxs" path="res://Scripts/Unit/EnemyUnit2D.gd" id="1_7wuab"]
-[ext_resource type="Texture2D" uid="uid://bmfa1k5yfxtqe" path="res://Placeholders/Sprites/Enemy_Front.png" id="3_xhd5l"]
-[ext_resource type="Script" uid="uid://cbxu2cfwgpjwg" path="res://Scripts/Stat/StatTemplate.gd" id="4_6bsue"]
-[ext_resource type="Script" uid="uid://dx787c60s4yjx" path="res://Scripts/Attack/Attack.gd" id="4_7wuab"]
-[ext_resource type="Script" uid="uid://bwluoofyu0fhe" path="res://Scripts/Stat/Stats.gd" id="5_7dsm4"]
-[ext_resource type="Script" uid="uid://cxjyo70m4kg8v" path="res://Scripts/Movement/EnemyMovement.gd" id="5_htpe8"]
-[ext_resource type="Resource" uid="uid://cotnxkja5h153" path="res://Resources/UnitStatsTemplates/stats_test_enemy.tres" id="6_6bsue"]
-[ext_resource type="Script" uid="uid://wrvmnol78qg7" path="res://Scripts/Ability/AbilityController.gd" id="8_b0whd"]
-[ext_resource type="Script" uid="uid://cj4mrt1ckacof" path="res://Scripts/Ability/ActiveAbility.gd" id="9_x6vwj"]
+[ext_resource type="Script" uid="uid://cw8502r5o4cxs" path="res://Scripts/Unit/EnemyUnit2D.gd" id="1_wwqga"]
+[ext_resource type="Texture2D" uid="uid://bmfa1k5yfxtqe" path="res://Placeholders/Sprites/Enemy_Front.png" id="2_al34m"]
+[ext_resource type="Script" uid="uid://dx787c60s4yjx" path="res://Scripts/Attack/Attack.gd" id="3_pj2f7"]
+[ext_resource type="Script" uid="uid://cbxu2cfwgpjwg" path="res://Scripts/Stat/StatTemplate.gd" id="4_ryarw"]
+[ext_resource type="Script" uid="uid://cxjyo70m4kg8v" path="res://Scripts/Movement/EnemyMovement.gd" id="5_g4cap"]
+[ext_resource type="Script" uid="uid://bwluoofyu0fhe" path="res://Scripts/Stat/Stats.gd" id="6_ljw5g"]
+[ext_resource type="Resource" uid="uid://cotnxkja5h153" path="res://Resources/UnitStatsTemplates/stats_test_enemy.tres" id="7_wky3c"]
+[ext_resource type="Script" uid="uid://wrvmnol78qg7" path="res://Scripts/Ability/AbilityController.gd" id="8_2ptut"]
+[ext_resource type="Script" uid="uid://cj4mrt1ckacof" path="res://Scripts/Ability/ActiveAbility.gd" id="9_ps6dr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xhd5l"]
 size = Vector2(128, 128)
 
 [sub_resource type="Resource" id="Resource_b0whd"]
-script = ExtResource("4_6bsue")
+script = ExtResource("4_ryarw")
 name = "Attack Speed"
 stat_id = &"attack_speed"
 value = 1.0
 metadata/_custom_type_script = "uid://cbxu2cfwgpjwg"
 
-[node name="PrefabBaseEnemy" type="Area2D" unique_id=532828671 node_paths=PackedStringArray("movement", "stats", "unit_sprite", "attack", "ability_controller")]
+[node name="EnemyUnit" type="Area2D" unique_id=532828671 node_paths=PackedStringArray("movement", "stats", "unit_sprite", "attack", "ability_controller")]
 collision_layer = 2
 collision_mask = 0
 monitoring = false
-script = ExtResource("1_7wuab")
+script = ExtResource("1_wwqga")
 movement = NodePath("EnemyMovement")
 stats = NodePath("Stats")
 unit_sprite = NodePath("Sprite2D")
@@ -34,32 +34,32 @@ metadata/_custom_type_script = "uid://cgweddqijr87x"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=628924977]
 position = Vector2(0, -64)
-texture = ExtResource("3_xhd5l")
+texture = ExtResource("2_al34m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=457064191]
 position = Vector2(0, -64)
 shape = SubResource("RectangleShape2D_xhd5l")
 
 [node name="Attack" type="Node" parent="." unique_id=1785878817]
-script = ExtResource("4_7wuab")
+script = ExtResource("3_pj2f7")
 attack_speed_stat_template = SubResource("Resource_b0whd")
 metadata/_custom_type_script = "uid://dx787c60s4yjx"
 
 [node name="EnemyMovement" type="Node" parent="." unique_id=752472774]
-script = ExtResource("5_htpe8")
+script = ExtResource("5_g4cap")
 speed = 20.0
 metadata/_custom_type_script = "uid://cxjyo70m4kg8v"
 
 [node name="Stats" type="Node" parent="." unique_id=1913965504]
-script = ExtResource("5_7dsm4")
-stats_template = ExtResource("6_6bsue")
+script = ExtResource("6_ljw5g")
+stats_template = ExtResource("7_wky3c")
 metadata/_custom_type_script = "uid://bwluoofyu0fhe"
 
 [node name="AbilityController" type="Node" parent="." unique_id=1241676151 node_paths=PackedStringArray("ability")]
-script = ExtResource("8_b0whd")
+script = ExtResource("8_2ptut")
 ability = NodePath("ActiveAbility")
 metadata/_custom_type_script = "uid://wrvmnol78qg7"
 
 [node name="ActiveAbility" type="Node" parent="AbilityController" unique_id=2008379666]
-script = ExtResource("9_x6vwj")
+script = ExtResource("9_ps6dr")
 metadata/_custom_type_script = "uid://cj4mrt1ckacof"

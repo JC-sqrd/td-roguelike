@@ -4,4 +4,4 @@ class_name StatValueProviderTemplate extends ValueProviderTemplate
 
 
 func build_value_provider(context : Dictionary[StringName, Variant]) -> ValueProvider:
-	return StatValueProvider.new(stat_template.build_stat())
+	return StatValueProvider.new(stat_template.build_stat(), bonus_values)

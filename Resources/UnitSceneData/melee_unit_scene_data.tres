@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="UnitSceneData" format=3 uid="uid://s1xqr0wn68op"]
+
+[ext_resource type="Script" uid="uid://c1je5gweo1jrl" path="res://Scripts/Unit/Resources/UnitSceneData.gd" id="1_y32eg"]
+[ext_resource type="PackedScene" uid="uid://2hunufhpa86t" path="res://Scenes/Units/melee_unit.tscn" id="2_blnpr"]
+
+[resource]
+script = ExtResource("1_y32eg")
+unit_id = &"melee_unit"
+unit_scene = ExtResource("2_blnpr")
+metadata/_custom_type_script = "uid://c1je5gweo1jrl"

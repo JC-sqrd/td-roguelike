@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dd5xvucuhjp6s"]
+
+[ext_resource type="Script" uid="uid://dpe2c4agtggr3" path="res://Scripts/UI/BattleUI/BattleUI.gd" id="1_at15e"]
+[ext_resource type="PackedScene" uid="uid://ngjgfriyojjd" path="res://Scenes/UI/RosterUI/ui_roster.tscn" id="1_d5hh1"]
+
+[node name="UIBattle" type="Control" unique_id=569840449]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_at15e")
+
+[node name="UiRoster" parent="." unique_id=1860542666 instance=ExtResource("1_d5hh1")]
+unique_name_in_owner = true
+layout_mode = 1

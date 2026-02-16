@@ -10,11 +10,12 @@ var texture : Texture2D
 var position : Vector2 = Vector2(0,0)
 var velocity : Vector2 = Vector2(0,0)
 var direction : Vector2 = Vector2(0,0)
-var pierce_count : int = 1
+var pierce_count : int = 0
 var speed : float = 0
 var lifetime : float = 5
 var _lifetime_counter : float = 0
 
+var context : Dictionary[StringName, Variant]
 var effects : Array[Effect]
 
 var hits : Array[RID]
@@ -143,14 +144,16 @@ func simulate_projectile(delta : float, callback_func : Callable):
 			continue
 		
 		for effect in effects:
-			EffectServer.receive_effect(area_rid, effect, {})
+			EffectServer.receive_effect(area_rid, effect, context)
 		
-		pierce_count -= 1
+		
 		
 		if pierce_count <= 0:
 			callback_func.call(self)
 			destroy_projectile()
 		hits.append(area_rid)
+		
+		pierce_count -= 1
 		
 	if add_lifetime_counter(delta):
 		callback_func.call(self)

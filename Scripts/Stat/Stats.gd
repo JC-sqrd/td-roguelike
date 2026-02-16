@@ -2,8 +2,17 @@ class_name Stats extends Node
 
 var actor : Unit2D
 @export var stats_template : StatsTemplate
+@export var tags : Array[StringName]
 var stat_dict : Dictionary[StringName, Stat]
 
+signal tag_added(tag : StringName)
+
+func add_tag(tag : StringName):
+	if has_tag(tag):
+		return
+	tags.append(tag)
+	tag_added.emit(tag)
+	pass
 
 func initialize(actor : Unit2D):
 	self.actor = actor
@@ -12,6 +21,9 @@ func initialize(actor : Unit2D):
 
 func has(stat_id : StringName) -> bool:
 	return stat_dict.has(stat_id)
+
+func has_tag(tag : StringName) -> bool:
+	return tags.has(tag)
 
 func get_stat(stat_id : StringName) -> Stat:
 	if stat_dict.has(stat_id):

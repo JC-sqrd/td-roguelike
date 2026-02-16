@@ -35,7 +35,7 @@ metadata/_custom_type_script = "uid://cxgihn8no5760"
 
 [sub_resource type="Resource" id="Resource_rutio"]
 script = ExtResource("14_r0kol")
-value = 100.0
+value = 35.0
 metadata/_custom_type_script = "uid://biebgrl65lhdp"
 
 [sub_resource type="Resource" id="Resource_dfsfn"]
@@ -66,7 +66,7 @@ monitoring = false
 script = ExtResource("1_ofjnw")
 stats = NodePath("Stats")
 unit_sprite = NodePath("Sprite2D")
-attack = NodePath("Attack")
+attack = NodePath("MeleeAttack")
 ability_controller = NodePath("AbilityController")
 metadata/_custom_type_script = "uid://cgweddqijr87x"
 
@@ -85,11 +85,11 @@ script = ExtResource("3_uxgpd")
 stats_template = ExtResource("4_xp5w7")
 metadata/_custom_type_script = "uid://bwluoofyu0fhe"
 
-[node name="Attack" type="Node" parent="." unique_id=994382061 node_paths=PackedStringArray("melee", "attack_timer")]
+[node name="MeleeAttack" type="Node" parent="." unique_id=994382061 node_paths=PackedStringArray("melee", "attack_timer")]
 script = ExtResource("5_hur62")
 melee_template = SubResource("Resource_3hejh")
-anim_frames = 4
 melee = NodePath("../Melee")
+anim_frames = 4
 anim_step = 0.083
 active_frames = Array[int]([3, 4, 5])
 effects_templates = Array[ExtResource("10_dfsfn")]([SubResource("Resource_4i4a7")])
@@ -97,7 +97,7 @@ attack_speed_stat_template = SubResource("Resource_s0bs6")
 attack_timer = NodePath("AttackTimer")
 metadata/_custom_type_script = "uid://g3tqyp6eubwp"
 
-[node name="AttackTimer" type="Timer" parent="Attack" unique_id=95477945]
+[node name="AttackTimer" type="Timer" parent="MeleeAttack" unique_id=95477945]
 
 [node name="Melee" type="Area2D" parent="." unique_id=243069506]
 position = Vector2(128, -64)

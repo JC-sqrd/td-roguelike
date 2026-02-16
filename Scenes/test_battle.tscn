@@ -2,13 +2,29 @@
 
 [ext_resource type="Script" uid="uid://cdngynad58nvx" path="res://Scripts/Battle/Battle.gd" id="1_qebdi"]
 [ext_resource type="PackedScene" uid="uid://b5pywi3rd23mo" path="res://Scenes/Grid/scene_grid.tscn" id="2_a40df"]
+[ext_resource type="Script" uid="uid://17shbg0ptp34" path="res://Scripts/Roster/RosterController.gd" id="3_a40df"]
+[ext_resource type="Script" uid="uid://c082ehry50nw7" path="res://Scripts/Roster/RosterDataTemplate.gd" id="4_gdbmr"]
+[ext_resource type="Script" uid="uid://c1je5gweo1jrl" path="res://Scripts/Unit/Resources/UnitSceneData.gd" id="5_im0qb"]
+[ext_resource type="Resource" uid="uid://cefkv7o6pgdl1" path="res://Resources/UnitSceneData/range_unit_scene_data.tres" id="6_e08h4"]
+[ext_resource type="Resource" uid="uid://s1xqr0wn68op" path="res://Resources/UnitSceneData/melee_unit_scene_data.tres" id="7_rvxmf"]
 
-[node name="TestBattle" type="Node2D" unique_id=2030252221 node_paths=PackedStringArray("grid")]
+[sub_resource type="Resource" id="Resource_yxv67"]
+script = ExtResource("4_gdbmr")
+unit_scene_data = Array[ExtResource("5_im0qb")]([ExtResource("6_e08h4"), ExtResource("7_rvxmf"), ExtResource("7_rvxmf"), ExtResource("7_rvxmf"), ExtResource("6_e08h4"), ExtResource("6_e08h4"), ExtResource("6_e08h4"), ExtResource("6_e08h4"), ExtResource("7_rvxmf"), ExtResource("7_rvxmf")])
+metadata/_custom_type_script = "uid://c082ehry50nw7"
+
+[node name="TestBattle" type="Node2D" unique_id=2030252221 node_paths=PackedStringArray("grid", "roster_controller")]
 script = ExtResource("1_qebdi")
 grid = NodePath("Grid")
+roster_controller = NodePath("RosterController")
 
 [node name="Grid" parent="." unique_id=703322131 instance=ExtResource("2_a40df")]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=932100681]
 position = Vector2(579, 322)
 zoom = Vector2(0.8, 0.8)
+
+[node name="RosterController" type="Node" parent="." unique_id=176057338]
+script = ExtResource("3_a40df")
+roster_data_template = SubResource("Resource_yxv67")
+metadata/_custom_type_script = "uid://17shbg0ptp34"

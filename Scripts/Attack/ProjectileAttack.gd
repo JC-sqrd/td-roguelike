@@ -18,6 +18,7 @@ func start_attack():
 	var projectile : Projectile = projectile_template.build_projectile(canvas_item)
 	projectile.set_body_collision_mask(projectile_coll_mask)
 	projectile.effects = effects
+	projectile.context = attack_context
 	ProjectileServer.add_projectile(projectile)
 	end_attack()
 	pass
@@ -69,7 +70,7 @@ func simulate_projectiles(delta : float):
 		pass
 
 func _on_scanner_collision_enter():
-	start_attack()
+	#start_attack()
 	attack_timer.start(1 / attack_speed_stat.get_value())
 	pass
 

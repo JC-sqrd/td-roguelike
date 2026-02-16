@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="UnitSceneData" format=3 uid="uid://dwr4wix6uu3ky"]
+
+[ext_resource type="Script" uid="uid://c1je5gweo1jrl" path="res://Scripts/Unit/Resources/UnitSceneData.gd" id="1_j7s5v"]
+[ext_resource type="PackedScene" uid="uid://cjmpcvq57n4k6" path="res://Scenes/Enemy/enemy_unit.tscn" id="2_7rgsq"]
+
+[resource]
+script = ExtResource("1_j7s5v")
+unit_id = &"enemy_unit"
+unit_scene = ExtResource("2_7rgsq")
+metadata/_custom_type_script = "uid://c1je5gweo1jrl"

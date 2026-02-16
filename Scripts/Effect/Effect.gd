@@ -3,7 +3,8 @@ class_name Effect extends RefCounted
 
 var mutators : Array[StatMutator]
 var modifiers : Array[StatModifier]
-
+var applied_tags : Array[StringName]
+var block_tags : Array[StringName]
 
 func apply_effect(stats : Stats, context : Dictionary = {}):
 	pass

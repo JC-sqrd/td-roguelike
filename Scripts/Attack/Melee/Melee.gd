@@ -29,4 +29,9 @@ func hit_collisions(pierce : bool = true):
 			for effect in effects:
 				EffectServer.receive_effect(collision, effect, context)
 		pass
+	else:
+		for collision in collisions:
+			for effect in effects:
+				EffectServer.receive_effect(collision, effect, context)
+			break
 	pass

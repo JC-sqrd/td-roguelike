@@ -18,7 +18,13 @@ stat_id = &"current_health"
 value = 100.0
 metadata/_custom_type_script = "uid://cbxu2cfwgpjwg"
 
+[sub_resource type="Resource" id="Resource_a06e4"]
+script = ExtResource("2_v0y2n")
+name = "Crit Chance"
+stat_id = &"crit_chance"
+metadata/_custom_type_script = "uid://cbxu2cfwgpjwg"
+
 [resource]
 script = ExtResource("1_dj1c7")
-stat_templates = Array[ExtResource("2_v0y2n")]([SubResource("Resource_v0y2n"), SubResource("Resource_edbuk")])
+stat_templates = Array[ExtResource("2_v0y2n")]([SubResource("Resource_v0y2n"), SubResource("Resource_edbuk"), SubResource("Resource_a06e4")])
 metadata/_custom_type_script = "uid://cdquhx3qorgp1"

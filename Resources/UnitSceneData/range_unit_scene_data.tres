@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="UnitSceneData" format=3 uid="uid://cefkv7o6pgdl1"]
+
+[ext_resource type="Script" uid="uid://c1je5gweo1jrl" path="res://Scripts/Unit/Resources/UnitSceneData.gd" id="1_dgncy"]
+[ext_resource type="PackedScene" uid="uid://wk226ka6adsl" path="res://Scenes/Units/range_unit.tscn" id="2_dmr5v"]
+
+[resource]
+script = ExtResource("1_dgncy")
+unit_id = &"range_unit"
+unit_scene = ExtResource("2_dmr5v")
+metadata/_custom_type_script = "uid://c1je5gweo1jrl"

@@ -1,13 +1,15 @@
 class_name MeleeAttack extends Attack
 
 @export var melee_template : MeleeTemplate
+@export var melee : Melee
+@export var pierce : bool = false
 var _frame_counter : int = 0
 
 @export var anim_fps : int = 12
 @export var anim_frames : int = 0
 @export var action_frame : int = 0
 
-@export var melee : Melee
+
 
 @export var anim_step : float = 0
 @export var active_frames : Array[int]
@@ -36,12 +38,15 @@ func initialize(actor : Unit2D):
 func start_attack():
 	melee.context = attack_context
 	active = true
-	melee.hit_collisions()
+	melee.hit_collisions(pierce)
+	end_attack()
 	pass
 
 
 func end_attack():
-	active = true
+	active = false
+	if melee.collisions.size() > 0:
+		attack_timer.start(1 / attack_speed_stat.get_value())
 	pass
 
 func _on_melee_area_entered(area : Area2D):

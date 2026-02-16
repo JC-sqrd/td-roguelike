@@ -29,6 +29,7 @@ func start_ability(stats : Stats, context : Dictionary[StringName,Variant]):
 	projectile_template.spawn_position = spawn_position.global_position
 	var projectile : Projectile
 	projectile = projectile_template.build_projectile(canvas_item)
+	projectile.context = context
 	projectile.pierce_count = pierce
 	projectile.effects.append(effect_template.build_effect(context)) 
 	projectile.set_body_collision_mask(coll_mask)

@@ -19,7 +19,7 @@ func _init(stat_id : StringName, value_provider : ValueProvider, required_contex
 	self.mode = mode
 	pass
 
-func apply_mutator(stat : Stat, context : Dictionary = {}):
+func apply_mutator(stat : Stat, context : Dictionary[StringName, Variant] = {}):
 	var _value : float = 0
 	_value = value_provider.get_value(context)
 	stat.add(_value * mode)

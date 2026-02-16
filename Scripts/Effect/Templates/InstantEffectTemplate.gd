@@ -10,4 +10,7 @@ func build_effect(context : Dictionary[StringName, Variant]) -> Effect:
 	#var modifiers : Array[StatModifier]
 	#for template : StatModifierTemplate in modifier_templates:
 	#	modifiers.append(template.build_modifier(context))
-	return InstantEffect.new(mutators)
+	var instant_effect : InstantEffect = InstantEffect.new(mutators)
+	instant_effect.applied_tags = applied_tags
+	instant_effect.block_tags = block_tags
+	return instant_effect
