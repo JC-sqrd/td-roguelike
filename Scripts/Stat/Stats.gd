@@ -1,6 +1,5 @@
 class_name Stats extends Node
 
-var actor : Unit2D
 @export var stats_template : StatsTemplate
 @export var tags : Array[StringName]
 var stat_dict : Dictionary[StringName, Stat]
@@ -14,8 +13,7 @@ func add_tag(tag : StringName):
 	tag_added.emit(tag)
 	pass
 
-func initialize(actor : Unit2D):
-	self.actor = actor
+func initialize():
 	stat_dict = stats_template.build_stats_from_template()
 	pass
 

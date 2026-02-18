@@ -22,7 +22,7 @@ const EFFECT_DAMAGE = preload("uid://b64oquaqda0w0")
 
 func _ready() -> void:
 	#stats = unit_data.stats
-	stats.initialize(self)
+	stats.initialize()
 	
 	context = {"stats" : stats, "actor" : self}
 	
@@ -57,4 +57,8 @@ func die():
 func _on_health_depleted():
 	died.emit(self)
 	queue_free()
+	pass
+
+func _exit_tree() -> void:
+	EffectServer.free_rid(get_rid())
 	pass

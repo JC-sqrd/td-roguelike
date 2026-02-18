@@ -5,7 +5,7 @@ extends Unit2D
 
 func _ready() -> void:
 	#stats = unit_data.stats
-	stats.initialize(self)
+	stats.initialize()
 	context = {"stats" : stats, "actor" : self}
 	
 	attack.initialize(self)
