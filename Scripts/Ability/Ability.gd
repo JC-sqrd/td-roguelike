@@ -4,6 +4,7 @@ class_name Ability extends Node
 @export var ability_id : StringName = "ability_id"
 @export var ability_name : String = "Ability"
 
+var caster : Unit2D
 var caster_stats : Stats
 var ability_stats : Stats
 var ability_context : Dictionary[StringName, Variant]
@@ -12,7 +13,7 @@ var ability_context : Dictionary[StringName, Variant]
 
 @export_multiline() var ability_details : String
 
-@abstract func activate(stats : Stats, context : Dictionary[StringName,Variant], args : Dictionary = {})
+@abstract func activate(caster : Unit2D, context : Dictionary[StringName,Variant], args : Dictionary = {})
 
 @abstract func deactivate()
 
@@ -24,7 +25,7 @@ var ability_context : Dictionary[StringName, Variant]
 func generate_ability_stats() -> Stats
 
 @abstract
-func generate_ability_context() -> Dictionary[StringName, Variant]
+func generate_ability_context(caster : Unit2D, ability_stats : Stats) -> Dictionary[StringName, Variant]
 
 func get_ability_description() -> String:
 	return ability_description

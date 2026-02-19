@@ -2,29 +2,33 @@ class_name Attack extends Node
 
 @export var effects_templates : Array[EffectTemplate]
 @export var attack_speed_stat_template : StatTemplate
+@export var attack_damage_stat_template : StatTemplate
 @export var attack_timer : Timer
 
 
 
 var attack_context : Dictionary[StringName, Variant]
+var attack_damage_stat : Stat
 var attack_speed_stat : Stat
 var canvas_item : CanvasItem
 var effects : Array[Effect]
 
 var can_attack : bool = false
 
-var actor : Unit2D
-var stats : Stats
+var attacker : Unit2D
+var attack_stats : Stats
 
 func _ready():
 	pass
 
-func initialize(actor : Unit2D):
-	self.actor = actor
-	self.stats = actor.stats
-	self.canvas_item = actor as CanvasItem
-	attack_speed_stat = attack_speed_stat_template.build_stat()
-	attack_context["actor"] = actor
+func initialize(attacker : Unit2D):
+	self.attacker = attacker
+	self.canvas_item = attacker as CanvasItem
+	
+	
+	initialize_stats()
+	
+	attack_context = generate_attack_context(attacker, attack_stats)
 	for effect_template in effects_templates:
 		effects.append(effect_template.build_effect(attack_context))
 	pass
@@ -43,3 +47,28 @@ func start_attack():
 
 func end_attack():
 	pass
+
+func initialize_stats():
+	attack_stats = generate_attack_stats()
+	add_child(attack_stats, true)
+	attack_stats.initialize()
+	
+	attack_speed_stat = attack_stats.get_stat(attack_speed_stat_template.stat_id)
+	attack_damage_stat = attack_stats.get_stat(attack_damage_stat_template.stat_id)
+	pass
+
+func generate_attack_stats() -> Stats:
+	var stats : Stats = Stats.new()
+	var stats_template : StatsTemplate = StatsTemplate.new()
+	stats_template.stat_templates.append(attack_speed_stat_template)
+	stats_template.stat_templates.append(attack_damage_stat_template)
+	
+	stats.stats_template = stats_template
+	
+	return stats
+
+func generate_attack_context(attacker : Unit2D, attack_stats : Stats) -> Dictionary[StringName, Variant]:
+	return {
+		"attacker" : attacker,
+		"attack_stats" : attack_stats
+	}

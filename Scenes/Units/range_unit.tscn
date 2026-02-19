@@ -9,7 +9,6 @@
 [ext_resource type="Script" uid="uid://c58d5uuvecjfb" path="res://Scripts/StatMutators/Templates/FlatStatMutatorTemplate.gd" id="7_5gudw"]
 [ext_resource type="Script" uid="uid://bvlmo7eyi5nvi" path="res://Scripts/ContextTag/ContextTag.gd" id="8_2ices"]
 [ext_resource type="Script" uid="uid://h5q0xghe0ry1" path="res://Scripts/StatModifiers/ValueProvider/BonusValue/BonusValue.gd" id="9_w2p04"]
-[ext_resource type="Script" uid="uid://jew6vpdsqhvk" path="res://Scripts/StatModifiers/ValueProvider/Templates/FlatValueStatProvider.gd" id="10_1co6k"]
 [ext_resource type="Script" uid="uid://ett7q7dk3f8l" path="res://Scripts/Effect/Templates/InstantEffectTemplate.gd" id="12_jw7gr"]
 [ext_resource type="Script" uid="uid://cbxu2cfwgpjwg" path="res://Scripts/Stat/StatTemplate.gd" id="13_3do7t"]
 [ext_resource type="Script" uid="uid://b7vrud1ewt7fv" path="res://Scripts/Attack/Scanner/ScannerRayCast2D.gd" id="14_tmx32"]
@@ -19,19 +18,20 @@
 [ext_resource type="Script" uid="uid://dori58efslgh0" path="res://Scripts/Ability/ActiveAbilities/AbilityPowerShot.gd" id="18_thlrs"]
 [ext_resource type="Script" uid="uid://daot3usdd4vjg" path="res://Scripts/Attack/Projectile/ProjectileTemplate/ProjectileTemplate.gd" id="19_3wnx6"]
 [ext_resource type="Script" uid="uid://bf4parr32iqky" path="res://Scripts/Attack/Projectile/ProjectileTemplate/ProjectileShape/CircleProjectileShape.gd" id="20_eronr"]
-[ext_resource type="Script" uid="uid://b1xg4dedusrdp" path="res://Scripts/StatModifiers/ValueProvider/Templates/AbilityStatValueProviderTemplate.gd" id="21_1co6k"]
+[ext_resource type="Script" uid="uid://b3i4782jqf5hj" path="res://Scripts/StatModifiers/ValueProvider/Templates/ContextStatsValueProviderTemplate.gd" id="21_1co6k"]
 [ext_resource type="Texture2D" uid="uid://d2xxkv4vdq1wj" path="res://Placeholders/Sprites/Placeholder Projectile.png" id="21_dn1t6"]
 
-[sub_resource type="Resource" id="Resource_7oy58"]
-script = ExtResource("10_1co6k")
-value = 20.0
-metadata/_custom_type_script = "uid://jew6vpdsqhvk"
+[sub_resource type="Resource" id="Resource_nv68h"]
+script = ExtResource("21_1co6k")
+context_stats_id = &"attack_stats"
+stat_id = &"attack_damage"
+metadata/_custom_type_script = "uid://b3i4782jqf5hj"
 
 [sub_resource type="Resource" id="Resource_gk5nh"]
 script = ExtResource("7_5gudw")
 mode = -1
 stat_id = &"current_health"
-value_provider_template = SubResource("Resource_7oy58")
+value_provider_template = SubResource("Resource_nv68h")
 metadata/_custom_type_script = "uid://c58d5uuvecjfb"
 
 [sub_resource type="Resource" id="Resource_ouxkb"]
@@ -45,6 +45,13 @@ script = ExtResource("13_3do7t")
 name = "Attack Speed"
 stat_id = &"attack_speed"
 value = 0.25
+metadata/_custom_type_script = "uid://cbxu2cfwgpjwg"
+
+[sub_resource type="Resource" id="Resource_1co6k"]
+script = ExtResource("13_3do7t")
+name = "Attack Damage"
+stat_id = &"attack_damage"
+value = 20.0
 metadata/_custom_type_script = "uid://cbxu2cfwgpjwg"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_58nij"]
@@ -65,8 +72,9 @@ metadata/_custom_type_script = "uid://daot3usdd4vjg"
 
 [sub_resource type="Resource" id="Resource_usbpd"]
 script = ExtResource("21_1co6k")
+context_stats_id = &"ability_stats"
 stat_id = &"ability_damage"
-metadata/_custom_type_script = "uid://b1xg4dedusrdp"
+metadata/_custom_type_script = "uid://b3i4782jqf5hj"
 
 [sub_resource type="Resource" id="Resource_6aw13"]
 script = ExtResource("7_5gudw")
@@ -115,6 +123,7 @@ projectile_template = ExtResource("5_pouuo")
 spawn_position_node = NodePath("../AttackPos")
 effects_templates = Array[ExtResource("6_f8clx")]([SubResource("Resource_ouxkb")])
 attack_speed_stat_template = SubResource("Resource_2l08a")
+attack_damage_stat_template = SubResource("Resource_1co6k")
 attack_timer = NodePath("AttackTimer")
 metadata/_custom_type_script = "uid://dx787c60s4yjx"
 

@@ -11,7 +11,6 @@ class_name Unit2D extends Area2D
 var unit_data : UnitData
 
 
-
 var health_manager : HealthManager
 var context : Dictionary[StringName, Variant]
 
@@ -39,7 +38,7 @@ func _ready() -> void:
 	
 	#Initialize AbilityController
 	var ability_controller_args : Dictionary = {"actor":self}
-	ability_controller.initialize(stats, {"actor" : self}, ability_controller_args)
+	ability_controller.initialize(self, {"actor" : self}, ability_controller_args)
 	pass
 
 

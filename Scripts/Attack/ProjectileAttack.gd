@@ -19,6 +19,7 @@ func start_attack():
 	projectile.set_body_collision_mask(projectile_coll_mask)
 	projectile.effects = effects
 	projectile.context = attack_context
+	
 	ProjectileServer.add_projectile(projectile)
 	end_attack()
 	pass

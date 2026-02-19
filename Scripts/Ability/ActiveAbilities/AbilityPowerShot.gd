@@ -23,16 +23,20 @@ var context : Dictionary[StringName, Variant]
 
 
 
-func activate(stats : Stats, context : Dictionary[StringName,Variant], args : Dictionary = {}):
+func activate(caster : Unit2D, context : Dictionary[StringName,Variant], args : Dictionary = {}):
 	canvas_item = args["actor"] as CanvasItem
-	self.caster_stats = stats
+	self.caster = caster
+	self.caster_stats = caster.stats
 	self.context = context
-	get_tree().create_timer(10).timeout.connect(on_timer_timout)
+	
 	ability_stats = generate_ability_stats()
-	ability_context = generate_ability_context()
 	
 	add_child(ability_stats)
 	ability_stats.initialize()
+	
+	ability_context = generate_ability_context(caster, ability_stats)
+	
+	get_tree().create_timer(10).timeout.connect(on_timer_timout)
 	pass
 
 func deactivate():
@@ -41,7 +45,7 @@ func deactivate():
 func start_ability(stats : Stats, context : Dictionary[StringName,Variant]):
 	#var projectile : Projectile = projectile_template.build_projectile()
 	
-	context.merge(generate_ability_context())
+	context.merge(generate_ability_context(caster, ability_stats))
 	
 	var projectile : Projectile
 	
@@ -72,9 +76,3 @@ func generate_ability_stats() -> Stats:
 	var stats : Stats = Stats.new()
 	stats.stats_template = stats_template
 	return stats
-
-func generate_ability_context() -> Dictionary[StringName, Variant]:
-	return {
-		"caster_stats" : caster_stats,
-		"ability_stats" : ability_stats
-	}
