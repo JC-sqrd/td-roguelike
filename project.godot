@@ -24,6 +24,7 @@ ProjectileServer="*uid://8nn00ue0556r"
 GameCanvasLayer="*uid://dcsqcwiwxiviu"
 UIManager="*uid://bm25x7o0mtlc0"
 SceneServer="*uid://djghww0q011x3"
+EntityServer="*uid://bx32qt5juotaa"
 
 [file_customization]
 

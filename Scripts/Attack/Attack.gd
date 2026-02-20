@@ -15,16 +15,15 @@ var effects : Array[Effect]
 
 var can_attack : bool = false
 
-var attacker : Unit2D
+var attacker : Entity
 var attack_stats : Stats
 
 func _ready():
 	pass
 
-func initialize(attacker : Unit2D):
+func initialize(attacker : Entity):
 	self.attacker = attacker
-	self.canvas_item = attacker as CanvasItem
-	
+	self.canvas_item = attacker.entity_2d as CanvasItem
 	
 	initialize_stats()
 	
@@ -67,7 +66,7 @@ func generate_attack_stats() -> Stats:
 	
 	return stats
 
-func generate_attack_context(attacker : Unit2D, attack_stats : Stats) -> Dictionary[StringName, Variant]:
+func generate_attack_context(attacker : Entity, attack_stats : Stats) -> Dictionary[StringName, Variant]:
 	return {
 		"attacker" : attacker,
 		"attack_stats" : attack_stats

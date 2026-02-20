@@ -1,8 +1,8 @@
 class_name AbilityController extends Node
 
-var actor : Unit2D
+var actor : Entity
 @export var ability : Ability
 
-func initialize(caster : Unit2D, context : Dictionary[StringName,Variant], args : Dictionary):
+func initialize(caster : Entity, context : Dictionary[StringName,Variant], args : Dictionary):
 	ability.activate(caster, context, args)
 	pass

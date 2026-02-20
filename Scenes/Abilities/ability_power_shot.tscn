@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://7j7s6lagitrr"]
+
+[ext_resource type="Script" uid="uid://dori58efslgh0" path="res://Scripts/Ability/ActiveAbilities/AbilityPowerShot.gd" id="1_3hs55"]
+[ext_resource type="Script" uid="uid://daot3usdd4vjg" path="res://Scripts/Attack/Projectile/ProjectileTemplate/ProjectileTemplate.gd" id="2_s1k6c"]
+[ext_resource type="Script" uid="uid://bf4parr32iqky" path="res://Scripts/Attack/Projectile/ProjectileTemplate/ProjectileShape/CircleProjectileShape.gd" id="3_ragvg"]
+[ext_resource type="Texture2D" uid="uid://d2xxkv4vdq1wj" path="res://Placeholders/Sprites/Placeholder Projectile.png" id="4_fw7gp"]
+[ext_resource type="Script" uid="uid://c58d5uuvecjfb" path="res://Scripts/StatMutators/Templates/FlatStatMutatorTemplate.gd" id="5_2m4o7"]
+[ext_resource type="Script" uid="uid://bvlmo7eyi5nvi" path="res://Scripts/ContextTag/ContextTag.gd" id="6_k6wcb"]
+[ext_resource type="Script" uid="uid://h5q0xghe0ry1" path="res://Scripts/StatModifiers/ValueProvider/BonusValue/BonusValue.gd" id="7_l563b"]
+[ext_resource type="Script" uid="uid://b3i4782jqf5hj" path="res://Scripts/StatModifiers/ValueProvider/Templates/ContextStatsValueProviderTemplate.gd" id="8_v1goa"]
+[ext_resource type="Script" uid="uid://ett7q7dk3f8l" path="res://Scripts/Effect/Templates/InstantEffectTemplate.gd" id="9_y2dn2"]
+[ext_resource type="Script" uid="uid://cbxu2cfwgpjwg" path="res://Scripts/Stat/StatTemplate.gd" id="10_nhwsl"]
+
+[sub_resource type="Resource" id="Resource_t0del"]
+script = ExtResource("3_ragvg")
+radius = 32.0
+metadata/_custom_type_script = "uid://bf4parr32iqky"
+
+[sub_resource type="Resource" id="Resource_7bjww"]
+script = ExtResource("2_s1k6c")
+shape = SubResource("Resource_t0del")
+texture = ExtResource("4_fw7gp")
+speed = 600.0
+collision_mask = 2
+metadata/_custom_type_script = "uid://daot3usdd4vjg"
+
+[sub_resource type="Resource" id="Resource_usbpd"]
+script = ExtResource("8_v1goa")
+context_stats_id = &"ability_stats"
+stat_id = &"ability_damage"
+metadata/_custom_type_script = "uid://b3i4782jqf5hj"
+
+[sub_resource type="Resource" id="Resource_6aw13"]
+script = ExtResource("5_2m4o7")
+mode = -1
+stat_id = &"current_health"
+value_provider_template = SubResource("Resource_usbpd")
+metadata/_custom_type_script = "uid://c58d5uuvecjfb"
+
+[sub_resource type="Resource" id="Resource_111n2"]
+script = ExtResource("9_y2dn2")
+flat_mutator_templates = Array[ExtResource("5_2m4o7")]([SubResource("Resource_6aw13")])
+block_tags = Array[StringName]([&"State.Buff.Invincible"])
+metadata/_custom_type_script = "uid://ett7q7dk3f8l"
+
+[sub_resource type="Resource" id="Resource_j02f4"]
+script = ExtResource("10_nhwsl")
+name = "Ability Damage"
+stat_id = &"ability_damage"
+value = 30.0
+metadata/_custom_type_script = "uid://cbxu2cfwgpjwg"
+
+[node name="AbilityPowerShot" type="Node" unique_id=1103324863]
+script = ExtResource("1_3hs55")
+projectile_template = SubResource("Resource_7bjww")
+effect_template = SubResource("Resource_111n2")
+ability_damage_stat_template = SubResource("Resource_j02f4")
+coll_layer = 1
+coll_mask = 2
+ability_id = &"power_shot"
+ability_name = "Power Shot"

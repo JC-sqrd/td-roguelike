@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://wk226ka6adsl"]
 
-[ext_resource type="Script" uid="uid://cgweddqijr87x" path="res://Scripts/Unit/Unit2D.gd" id="1_1co6k"]
+[ext_resource type="Script" uid="uid://cgweddqijr87x" path="res://Scripts/Unit/Entity.gd" id="1_1co6k"]
+[ext_resource type="Script" uid="uid://bvat0sr6wf1ct" path="res://Scripts/Unit/Unit.gd" id="1_iul1y"]
 [ext_resource type="Texture2D" uid="uid://d1lp28kme3fke" path="res://Placeholders/Sprites/Character_Front.png" id="2_usbpd"]
 [ext_resource type="Script" uid="uid://cxrtec2mkmkwa" path="res://Scripts/Attack/Scanner/Scanner.gd" id="3_j02f4"]
+[ext_resource type="Script" uid="uid://l4vm1l78yxg2" path="res://Scripts/Items/ItemInventory.gd" id="3_nv68h"]
+[ext_resource type="Resource" uid="uid://dexogxuymtghv" path="res://Resources/ItemData/base_item.tres" id="4_1co6k"]
 [ext_resource type="Script" uid="uid://bj80inxdbmrak" path="res://Scripts/Attack/ProjectileAttack.gd" id="4_7oy58"]
 [ext_resource type="Resource" uid="uid://u8qjlnk57elf" path="res://Resources/ProjectileTemplates/fast_projectile_template.tres" id="5_pouuo"]
 [ext_resource type="Script" uid="uid://rq6t2ktj4pbf" path="res://Scripts/Effect/Templates/EffectTemplate.gd" id="6_f8clx"]
@@ -14,12 +17,10 @@
 [ext_resource type="Script" uid="uid://b7vrud1ewt7fv" path="res://Scripts/Attack/Scanner/ScannerRayCast2D.gd" id="14_tmx32"]
 [ext_resource type="Script" uid="uid://bwluoofyu0fhe" path="res://Scripts/Stat/Stats.gd" id="15_wat0g"]
 [ext_resource type="Resource" uid="uid://d3r2ucqmlvmci" path="res://Resources/UnitStatsTemplates/stats_test_unit.tres" id="16_yq0ew"]
+[ext_resource type="PackedScene" uid="uid://7j7s6lagitrr" path="res://Scenes/Abilities/ability_power_shot.tscn" id="17_bm62s"]
 [ext_resource type="Script" uid="uid://wrvmnol78qg7" path="res://Scripts/Ability/AbilityController.gd" id="17_bod52"]
-[ext_resource type="Script" uid="uid://dori58efslgh0" path="res://Scripts/Ability/ActiveAbilities/AbilityPowerShot.gd" id="18_thlrs"]
-[ext_resource type="Script" uid="uid://daot3usdd4vjg" path="res://Scripts/Attack/Projectile/ProjectileTemplate/ProjectileTemplate.gd" id="19_3wnx6"]
-[ext_resource type="Script" uid="uid://bf4parr32iqky" path="res://Scripts/Attack/Projectile/ProjectileTemplate/ProjectileShape/CircleProjectileShape.gd" id="20_eronr"]
+[ext_resource type="Script" uid="uid://crvj02bgldlcg" path="res://Scripts/Movement/UnitMovement.gd" id="19_2mcow"]
 [ext_resource type="Script" uid="uid://b3i4782jqf5hj" path="res://Scripts/StatModifiers/ValueProvider/Templates/ContextStatsValueProviderTemplate.gd" id="21_1co6k"]
-[ext_resource type="Texture2D" uid="uid://d2xxkv4vdq1wj" path="res://Placeholders/Sprites/Placeholder Projectile.png" id="21_dn1t6"]
 
 [sub_resource type="Resource" id="Resource_nv68h"]
 script = ExtResource("21_1co6k")
@@ -57,55 +58,53 @@ metadata/_custom_type_script = "uid://cbxu2cfwgpjwg"
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_58nij"]
 size = Vector2(128, 128)
 
-[sub_resource type="Resource" id="Resource_t0del"]
-script = ExtResource("20_eronr")
-radius = 32.0
-metadata/_custom_type_script = "uid://bf4parr32iqky"
-
-[sub_resource type="Resource" id="Resource_7bjww"]
-script = ExtResource("19_3wnx6")
-shape = SubResource("Resource_t0del")
-texture = ExtResource("21_dn1t6")
-speed = 600.0
-collision_mask = 2
-metadata/_custom_type_script = "uid://daot3usdd4vjg"
-
-[sub_resource type="Resource" id="Resource_usbpd"]
-script = ExtResource("21_1co6k")
-context_stats_id = &"ability_stats"
-stat_id = &"ability_damage"
-metadata/_custom_type_script = "uid://b3i4782jqf5hj"
-
-[sub_resource type="Resource" id="Resource_6aw13"]
-script = ExtResource("7_5gudw")
-mode = -1
-stat_id = &"current_health"
-value_provider_template = SubResource("Resource_usbpd")
-metadata/_custom_type_script = "uid://c58d5uuvecjfb"
-
-[sub_resource type="Resource" id="Resource_111n2"]
-script = ExtResource("12_jw7gr")
-flat_mutator_templates = Array[ExtResource("7_5gudw")]([SubResource("Resource_6aw13")])
-block_tags = Array[StringName]([&"State.Buff.Invincible"])
-metadata/_custom_type_script = "uid://ett7q7dk3f8l"
-
-[sub_resource type="Resource" id="Resource_j02f4"]
-script = ExtResource("13_3do7t")
-name = "Ability Damage"
-stat_id = &"ability_damage"
-value = 30.0
-metadata/_custom_type_script = "uid://cbxu2cfwgpjwg"
-
-[node name="RangeUnit" type="Area2D" unique_id=1989289329 node_paths=PackedStringArray("stats", "unit_sprite", "attack", "ability_controller")]
-z_index = 1
+[node name="RangeUnit" type="Area2D" unique_id=1989289329 node_paths=PackedStringArray("entity", "unit_movement")]
+z_index = 2
 texture_filter = 1
 collision_mask = 0
 monitoring = false
+script = ExtResource("1_iul1y")
+entity = NodePath("Entity")
+unit_movement = NodePath("UnitMovement")
+
+[node name="Entity" type="Node" parent="." unique_id=1641761894 node_paths=PackedStringArray("stats", "unit_sprite", "attack", "ability_controller", "item_inventory")]
 script = ExtResource("1_1co6k")
 stats = NodePath("Stats")
-unit_sprite = NodePath("Sprite2D")
+unit_sprite = NodePath("../Sprite2D")
 attack = NodePath("Attack")
 ability_controller = NodePath("AbilityController")
+item_inventory = NodePath("ItemInventory")
+metadata/_custom_type_script = "uid://cgweddqijr87x"
+
+[node name="ItemInventory" type="Node" parent="Entity" unique_id=1120649686]
+script = ExtResource("3_nv68h")
+item_data = Array[Object]([ExtResource("4_1co6k"), ExtResource("4_1co6k"), ExtResource("4_1co6k"), ExtResource("4_1co6k")])
+metadata/_custom_type_script = "uid://l4vm1l78yxg2"
+
+[node name="Attack" type="Node" parent="Entity" unique_id=2138320614 node_paths=PackedStringArray("scanner", "spawn_position_node", "attack_timer")]
+script = ExtResource("4_7oy58")
+scanner = NodePath("../../Scanner2D")
+projectile_template = ExtResource("5_pouuo")
+spawn_position_node = NodePath("../../AttackPos")
+effects_templates = Array[ExtResource("6_f8clx")]([SubResource("Resource_ouxkb")])
+attack_speed_stat_template = SubResource("Resource_2l08a")
+attack_damage_stat_template = SubResource("Resource_1co6k")
+attack_timer = NodePath("AttackTimer")
+metadata/_custom_type_script = "uid://dx787c60s4yjx"
+
+[node name="AttackTimer" type="Timer" parent="Entity/Attack" unique_id=2036632767]
+
+[node name="Stats" type="Node" parent="Entity" unique_id=492540033]
+script = ExtResource("15_wat0g")
+stats_template = ExtResource("16_yq0ew")
+metadata/_custom_type_script = "uid://bwluoofyu0fhe"
+
+[node name="AbilityController" type="Node" parent="Entity" unique_id=243434454 node_paths=PackedStringArray("ability")]
+script = ExtResource("17_bod52")
+ability = NodePath("AbilityPowerShot")
+
+[node name="AbilityPowerShot" parent="Entity/AbilityController" unique_id=1103324863 node_paths=PackedStringArray("spawn_position") instance=ExtResource("17_bm62s")]
+spawn_position = NodePath("../../../AttackPos")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=43116825]
 position = Vector2(0, -64)
@@ -115,19 +114,6 @@ texture = ExtResource("2_usbpd")
 script = ExtResource("3_j02f4")
 ray_casts = [NodePath("../RayCast2D")]
 metadata/_custom_type_script = "uid://cxrtec2mkmkwa"
-
-[node name="Attack" type="Node" parent="." unique_id=2138320614 node_paths=PackedStringArray("scanner", "spawn_position_node", "attack_timer")]
-script = ExtResource("4_7oy58")
-scanner = NodePath("../Scanner2D")
-projectile_template = ExtResource("5_pouuo")
-spawn_position_node = NodePath("../AttackPos")
-effects_templates = Array[ExtResource("6_f8clx")]([SubResource("Resource_ouxkb")])
-attack_speed_stat_template = SubResource("Resource_2l08a")
-attack_damage_stat_template = SubResource("Resource_1co6k")
-attack_timer = NodePath("AttackTimer")
-metadata/_custom_type_script = "uid://dx787c60s4yjx"
-
-[node name="AttackTimer" type="Timer" parent="Attack" unique_id=2036632767]
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=1931951332]
 position = Vector2(0, -64)
@@ -141,26 +127,10 @@ script = ExtResource("14_tmx32")
 position = Vector2(0, -64)
 shape = SubResource("RectangleShape2D_58nij")
 
-[node name="Stats" type="Node" parent="." unique_id=492540033]
-script = ExtResource("15_wat0g")
-stats_template = ExtResource("16_yq0ew")
-metadata/_custom_type_script = "uid://bwluoofyu0fhe"
-
 [node name="AttackPos" type="Marker2D" parent="." unique_id=1500609088]
 position = Vector2(0, -93)
 gizmo_extents = 20.0
 
-[node name="AbilityController" type="Node" parent="." unique_id=243434454 node_paths=PackedStringArray("ability")]
-script = ExtResource("17_bod52")
-ability = NodePath("AbilityPowerShot")
-
-[node name="AbilityPowerShot" type="Node" parent="AbilityController" unique_id=1148740025 node_paths=PackedStringArray("spawn_position")]
-script = ExtResource("18_thlrs")
-projectile_template = SubResource("Resource_7bjww")
-spawn_position = NodePath("../../AttackPos")
-effect_template = SubResource("Resource_111n2")
-ability_damage_stat_template = SubResource("Resource_j02f4")
-coll_layer = 1
-coll_mask = 2
-ability_id = &"power_shot"
-ability_name = "Power Shot"
+[node name="UnitMovement" type="Node" parent="." unique_id=273711644]
+script = ExtResource("19_2mcow")
+metadata/_custom_type_script = "uid://crvj02bgldlcg"

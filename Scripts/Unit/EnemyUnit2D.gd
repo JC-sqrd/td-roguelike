@@ -1,10 +1,11 @@
-extends Unit2D
+extends Entity
 
 
 @export var movement : UnitMovement
 
-func _ready() -> void:
-	#stats = unit_data.stats
+
+func initialize(rid : RID):
+	entity_rid = rid
 	stats.initialize()
 	context = {"stats" : stats, "actor" : self}
 	
@@ -13,12 +14,10 @@ func _ready() -> void:
 	var effect_listener : EffectListener = EffectListener.new(stats)
 	
 	#Register effect listener to effect server
-	EffectServer.register_effect_listener(get_rid(), effect_listener)
+	EffectServer.register_effect_listener(entity_rid, effect_listener)
 	
 	#Initialize health manager
 	health_manager = HealthManager.new(stats.get_stat("max_health"), stats.get_stat("current_health"))
 	health_manager.health_depleted.connect(_on_health_depleted)
 	
 	movement.initialize(self)
-	
-	pass

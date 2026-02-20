@@ -29,7 +29,7 @@ func _ready() -> void:
 	attack_timer.timeout.connect(_on_attack_timer_timeout)
 
 
-func initialize(actor : Unit2D):
+func initialize(actor : Entity):
 	super(actor)
 	melee.effects = self.effects
 

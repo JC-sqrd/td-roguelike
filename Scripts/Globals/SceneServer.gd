@@ -10,8 +10,8 @@ static var enemy_scenes : Dictionary[StringName,UnitSceneData] = {
 	preload("uid://dwr4wix6uu3ky").unit_id : preload("uid://dwr4wix6uu3ky")
 }
 
-static func instantiate_unit(unit_id : StringName) -> Unit2D:
-	var unit : Unit2D = unit_scenes[unit_id].unit_scene.instantiate() as Unit2D
+static func instantiate_unit(unit_id : StringName) -> Entity:
+	var unit : Entity = unit_scenes[unit_id].unit_scene.instantiate() as Entity
 	return unit
 
 static func get_unit_scene(unit_id : StringName) -> PackedScene:

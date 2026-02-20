@@ -17,14 +17,13 @@ extends ActiveAbility
 @export_flags_2d_physics var coll_mask : int = 0
 
 var canvas_item : CanvasItem
-
 var context : Dictionary[StringName, Variant]
 
 
 
 
-func activate(caster : Unit2D, context : Dictionary[StringName,Variant], args : Dictionary = {}):
-	canvas_item = args["actor"] as CanvasItem
+func activate(caster : Entity, context : Dictionary[StringName,Variant], args : Dictionary = {}):
+	canvas_item = args["canvas_item"] as CanvasItem
 	self.caster = caster
 	self.caster_stats = caster.stats
 	self.context = context

@@ -1,4 +1,4 @@
-class_name Unit2D extends Area2D
+class_name Entity extends Node
 
 
 @export var unit_tile_size : Vector2i = Vector2i(1,1)
@@ -6,21 +6,22 @@ class_name Unit2D extends Area2D
 @export var unit_sprite : Sprite2D
 @export var attack : Attack
 @export var ability_controller : AbilityController
-
+@export var item_inventory : ItemInventory
 
 var unit_data : UnitData
 
-
+var entity_2d : Node2D
+var entity_rid : RID
 var health_manager : HealthManager
 var context : Dictionary[StringName, Variant]
 
-signal died(unit : Unit2D)
+signal died(unit : Entity)
 
-@export var offsets : Array[Vector2i] = [Vector2i(0,0)]  
-const EFFECT_DAMAGE = preload("uid://b64oquaqda0w0")
 
-func _ready() -> void:
-	#stats = unit_data.stats
+
+func initialize(entity_2d : Node2D, rid : RID):
+	self.entity_2d = entity_2d
+	self.entity_rid = rid
 	stats.initialize()
 	
 	context = {"stats" : stats, "actor" : self}
@@ -30,15 +31,19 @@ func _ready() -> void:
 	var effect_listener : EffectListener = EffectListener.new(stats)
 	
 	#Register effect listener to effect server
-	EffectServer.register_effect_listener(get_rid(), effect_listener)
+	EffectServer.register_effect_listener(entity_rid, effect_listener)
 	
 	#Initialize HealthManager
 	health_manager = HealthManager.new(stats.get_stat("max_health"), stats.get_stat("current_health"))
 	health_manager.health_depleted.connect(_on_health_depleted)
 	
 	#Initialize AbilityController
-	var ability_controller_args : Dictionary = {"actor":self}
+	var ability_controller_args : Dictionary = {"canvas_item":entity_2d}
 	ability_controller.initialize(self, {"actor" : self}, ability_controller_args)
+	
+	#Initialize item inventory
+	item_inventory.initialize(self)
+	
 	pass
 
 
@@ -55,9 +60,8 @@ func die():
 
 func _on_health_depleted():
 	died.emit(self)
-	queue_free()
 	pass
 
 func _exit_tree() -> void:
-	EffectServer.free_rid(get_rid())
+	EffectServer.free_rid(entity_rid)
 	pass

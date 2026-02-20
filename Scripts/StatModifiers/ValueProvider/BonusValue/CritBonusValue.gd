@@ -6,7 +6,7 @@ class_name CritBonusValue extends BonusValue
 var crit_chance : float = 0
 
 func get_bonus_value(value : float, context : Dictionary[StringName, Variant]) -> float:
-	var actor : Unit2D = context["actor"]
+	var actor : Entity = context["actor"]
 	var stats : Stats = actor.stats
 	var crit_chance_stat : Stat = stats.get_stat(crit_chance_stat_id)
 	

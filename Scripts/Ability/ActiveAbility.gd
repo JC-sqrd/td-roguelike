@@ -3,7 +3,7 @@ class_name ActiveAbility extends Ability
 
 
 
-func activate(caster : Unit2D, context : Dictionary[StringName,Variant], args : Dictionary = {}):
+func activate(caster : Entity, context : Dictionary[StringName,Variant], args : Dictionary = {}):
 	pass
 
 func deactivate():
@@ -19,7 +19,7 @@ func generate_ability_stats() -> Stats:
 	printerr("Calling ActiveAbility's base generate_ability_stats function")
 	return null
 
-func generate_ability_context(caster : Unit2D, ability_stats : Stats) -> Dictionary[StringName, Variant]:
+func generate_ability_context(caster : Entity, ability_stats : Stats) -> Dictionary[StringName, Variant]:
 	return {
 		"caster" : caster,
 		"caster_stats" : caster.stats,

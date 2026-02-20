@@ -9,19 +9,27 @@ var grid_rect : Rect2i
 
 var grid : Array[TileModel]
 
-var tiled_units : Dictionary[Unit2D, TileModel]
+var tiled_units : Dictionary[Unit, TileModel]
 
-func add_unit_on_tile(unit : Unit2D, tile_model : TileModel) -> bool:
+func add_unit_on_tile(unit : Unit, tile_model : TileModel, offset_tiles : Array[TileModel]) -> bool:
 	if !tile_model.occupied:
 		tile_model.occupied = true
 		tiled_units[unit] = tile_model
+		
+		for offset_tile in offset_tiles:
+			offset_tile.occupied = true
+			pass
+		
 		return true
 	return false
 
-func remove_unit_on_tile(unit : Unit2D, tile_model : TileModel) -> bool:
+func remove_unit_on_tile(unit : Unit, tile_model : TileModel, offset_tiles : Array[TileModel]) -> bool:
 	if tiled_units.has(unit):
 		tiled_units.erase(unit)
 		tile_model.occupied = false
+		
+		for offset_tile in offset_tiles:
+			offset_tile.occupied = false
 		return true
 	return false
 

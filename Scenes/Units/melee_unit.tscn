@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://2hunufhpa86t"]
 
-[ext_resource type="Script" uid="uid://cgweddqijr87x" path="res://Scripts/Unit/Unit2D.gd" id="1_ofjnw"]
+[ext_resource type="Script" uid="uid://bvat0sr6wf1ct" path="res://Scripts/Unit/Unit.gd" id="1_bkvpy"]
+[ext_resource type="Script" uid="uid://cgweddqijr87x" path="res://Scripts/Unit/Entity.gd" id="1_ofjnw"]
 [ext_resource type="Texture2D" uid="uid://d1lp28kme3fke" path="res://Placeholders/Sprites/Character_Front.png" id="2_3vfox"]
 [ext_resource type="Script" uid="uid://cax8i3mtksvr5" path="res://Scripts/Attack/Melee/Melee.gd" id="2_bkvpy"]
 [ext_resource type="Script" uid="uid://bwluoofyu0fhe" path="res://Scripts/Stat/Stats.gd" id="3_uxgpd"]
@@ -13,14 +14,11 @@
 [ext_resource type="Script" uid="uid://rq6t2ktj4pbf" path="res://Scripts/Effect/Templates/EffectTemplate.gd" id="10_dfsfn"]
 [ext_resource type="Script" uid="uid://c58d5uuvecjfb" path="res://Scripts/StatMutators/Templates/FlatStatMutatorTemplate.gd" id="11_h6fpk"]
 [ext_resource type="Script" uid="uid://bvlmo7eyi5nvi" path="res://Scripts/ContextTag/ContextTag.gd" id="12_flsbn"]
-[ext_resource type="Script" uid="uid://h5q0xghe0ry1" path="res://Scripts/StatModifiers/ValueProvider/BonusValue/BonusValue.gd" id="13_heoxh"]
-[ext_resource type="Script" uid="uid://biebgrl65lhdp" path="res://Scripts/StatModifiers/ValueProvider/Templates/ValueProviderTemplate.gd" id="14_r0kol"]
 [ext_resource type="Script" uid="uid://wrvmnol78qg7" path="res://Scripts/Ability/AbilityController.gd" id="15_gqnp8"]
 [ext_resource type="Script" uid="uid://cj4mrt1ckacof" path="res://Scripts/Ability/ActiveAbility.gd" id="16_bkvpy"]
+[ext_resource type="Script" uid="uid://l4vm1l78yxg2" path="res://Scripts/Items/ItemInventory.gd" id="16_dfsfn"]
 [ext_resource type="Script" uid="uid://ett7q7dk3f8l" path="res://Scripts/Effect/Templates/InstantEffectTemplate.gd" id="17_u5qbr"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vfox"]
-size = Vector2(128, 128)
+[ext_resource type="Script" uid="uid://crvj02bgldlcg" path="res://Scripts/Movement/UnitMovement.gd" id="18_rutio"]
 
 [sub_resource type="Resource" id="Resource_ia0og"]
 script = ExtResource("8_3hejh")
@@ -34,8 +32,6 @@ collision_mask = 2
 metadata/_custom_type_script = "uid://cxgihn8no5760"
 
 [sub_resource type="Resource" id="Resource_rutio"]
-script = ExtResource("14_r0kol")
-value = 35.0
 metadata/_custom_type_script = "uid://biebgrl65lhdp"
 
 [sub_resource type="Resource" id="Resource_dfsfn"]
@@ -57,18 +53,61 @@ stat_id = &"attack_speed"
 value = 0.77
 metadata/_custom_type_script = "uid://cbxu2cfwgpjwg"
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vfox"]
+size = Vector2(128, 128)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bkvpy"]
 size = Vector2(128, 64)
 
-[node name="MeleeUnit" type="Area2D" unique_id=1011832565 node_paths=PackedStringArray("stats", "unit_sprite", "attack", "ability_controller")]
+[node name="MeleeUnit" type="Area2D" unique_id=2104577434 node_paths=PackedStringArray("entity", "unit_movement")]
 collision_mask = 0
 monitoring = false
+script = ExtResource("1_bkvpy")
+entity = NodePath("Entity")
+unit_movement = NodePath("UnitMovement")
+unit_size_offsets = Array[Vector2]([Vector2(1, 0)])
+
+[node name="Entity" type="Node" parent="." unique_id=2062278789 node_paths=PackedStringArray("stats", "unit_sprite", "attack", "ability_controller", "item_inventory")]
 script = ExtResource("1_ofjnw")
 stats = NodePath("Stats")
-unit_sprite = NodePath("Sprite2D")
+unit_sprite = NodePath("../Sprite2D")
 attack = NodePath("MeleeAttack")
 ability_controller = NodePath("AbilityController")
+item_inventory = NodePath("ItemInventory")
 metadata/_custom_type_script = "uid://cgweddqijr87x"
+
+[node name="ItemInventory" type="Node" parent="Entity" unique_id=1005575157]
+script = ExtResource("16_dfsfn")
+item_data = null
+metadata/_custom_type_script = "uid://l4vm1l78yxg2"
+
+[node name="Stats" type="Node" parent="Entity" unique_id=283566115]
+script = ExtResource("3_uxgpd")
+stats_template = ExtResource("4_xp5w7")
+metadata/_custom_type_script = "uid://bwluoofyu0fhe"
+
+[node name="MeleeAttack" type="Node" parent="Entity" unique_id=994382061 node_paths=PackedStringArray("melee", "attack_timer")]
+script = ExtResource("5_hur62")
+melee_template = SubResource("Resource_3hejh")
+melee = NodePath("../../Melee")
+anim_frames = 4
+anim_step = 0.083
+active_frames = Array[int]([3, 4, 5])
+effects_templates = Array[ExtResource("10_dfsfn")]([SubResource("Resource_4i4a7")])
+attack_speed_stat_template = SubResource("Resource_s0bs6")
+attack_timer = NodePath("AttackTimer")
+metadata/_custom_type_script = "uid://g3tqyp6eubwp"
+
+[node name="AttackTimer" type="Timer" parent="Entity/MeleeAttack" unique_id=95477945]
+
+[node name="AbilityController" type="Node" parent="Entity" unique_id=102196218 node_paths=PackedStringArray("ability")]
+script = ExtResource("15_gqnp8")
+ability = NodePath("ActiveAbility")
+metadata/_custom_type_script = "uid://wrvmnol78qg7"
+
+[node name="ActiveAbility" type="Node" parent="Entity/AbilityController" unique_id=316062809]
+script = ExtResource("16_bkvpy")
+metadata/_custom_type_script = "uid://cj4mrt1ckacof"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=400991827]
 position = Vector2(0, -64)
@@ -79,25 +118,6 @@ modulate = Color(0.28235295, 0.80784315, 0.8392157, 1)
 texture_filter = 1
 position = Vector2(0, -64)
 texture = ExtResource("2_3vfox")
-
-[node name="Stats" type="Node" parent="." unique_id=283566115]
-script = ExtResource("3_uxgpd")
-stats_template = ExtResource("4_xp5w7")
-metadata/_custom_type_script = "uid://bwluoofyu0fhe"
-
-[node name="MeleeAttack" type="Node" parent="." unique_id=994382061 node_paths=PackedStringArray("melee", "attack_timer")]
-script = ExtResource("5_hur62")
-melee_template = SubResource("Resource_3hejh")
-melee = NodePath("../Melee")
-anim_frames = 4
-anim_step = 0.083
-active_frames = Array[int]([3, 4, 5])
-effects_templates = Array[ExtResource("10_dfsfn")]([SubResource("Resource_4i4a7")])
-attack_speed_stat_template = SubResource("Resource_s0bs6")
-attack_timer = NodePath("AttackTimer")
-metadata/_custom_type_script = "uid://g3tqyp6eubwp"
-
-[node name="AttackTimer" type="Timer" parent="MeleeAttack" unique_id=95477945]
 
 [node name="Melee" type="Area2D" parent="." unique_id=243069506]
 position = Vector2(128, -64)
@@ -111,11 +131,6 @@ metadata/_custom_type_script = "uid://cax8i3mtksvr5"
 shape = SubResource("RectangleShape2D_bkvpy")
 debug_color = Color(0.66957814, 0.50996643, 0, 0.41960785)
 
-[node name="AbilityController" type="Node" parent="." unique_id=102196218 node_paths=PackedStringArray("ability")]
-script = ExtResource("15_gqnp8")
-ability = NodePath("ActiveAbility")
-metadata/_custom_type_script = "uid://wrvmnol78qg7"
-
-[node name="ActiveAbility" type="Node" parent="AbilityController" unique_id=316062809]
-script = ExtResource("16_bkvpy")
-metadata/_custom_type_script = "uid://cj4mrt1ckacof"
+[node name="UnitMovement" type="Node" parent="." unique_id=83572512]
+script = ExtResource("18_rutio")
+metadata/_custom_type_script = "uid://crvj02bgldlcg"

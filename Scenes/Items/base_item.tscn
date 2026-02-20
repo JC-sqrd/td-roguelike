@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://rcotgmc77sn8"]
+
+[ext_resource type="Script" uid="uid://b3m6pe32p0sk1" path="res://Scripts/Items/Item.gd" id="1_pk0ob"]
+[ext_resource type="Script" uid="uid://droqu3qdl43hw" path="res://Scripts/Items/ItemEquip.gd" id="2_g3cm7"]
+
+[node name="BaseItem" type="Node" unique_id=1823730977 node_paths=PackedStringArray("item_equip")]
+script = ExtResource("1_pk0ob")
+item_equip = NodePath("ItemEquip")
+metadata/_custom_type_script = "uid://b3m6pe32p0sk1"
+
+[node name="ItemEquip" type="Node" parent="." unique_id=1352104203]
+script = ExtResource("2_g3cm7")
+metadata/_custom_type_script = "uid://droqu3qdl43hw"

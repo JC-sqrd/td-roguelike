@@ -4,10 +4,10 @@ class_name UnitMovement extends Node
 var direction : Vector2 = Vector2(-1,0)
 var velocity : Vector2 = Vector2(0,0)
 
-var unit : Unit2D
+var unit : Unit
 var active : bool = false
 
-func initialize(unit : Unit2D):
+func initialize(unit : Unit):
 	self.unit = unit
 	active = true
 	pass

@@ -61,16 +61,16 @@ func generate_model_from_tile_map(tile_map_layer : TileMapLayer) -> GridData:
 	grid_data.grid = grid
 	return grid_data
 
-func _on_unit_placed_on_tile_model(unit : Unit2D, tile_model : TileModel):
+func _on_unit_placed_on_tile_model(unit : Unit, tile_model : TileModel):
 	print("PLACED UNIT ON TILE " + str(tile_model.tile_index))
 	unit.global_position = tile_model.tile_global_pos
 	add_child(unit)
-	unit.scale_tile_sprite(grid_data.tile_size)
+	unit.entity.scale_tile_sprite(grid_data.tile_size)
 	pass
 
-func _on_unit_spawned_on_tile_model(unit : Unit2D, tile_model : TileModel):
+func _on_unit_spawned_on_tile_model(unit : Unit, tile_model : TileModel):
 	print("SPAWNED UNIT ON TILE " + str(tile_model.tile_index))
 	unit.global_position = tile_model.tile_global_pos
 	add_child(unit)
-	unit.scale_tile_sprite(grid_data.tile_size)
+	unit.entity.scale_tile_sprite(grid_data.tile_size)
 	pass
