@@ -7,7 +7,6 @@
 script = ExtResource("1_nfsxt")
 item_name = "Base Item"
 item_id = &"base_item"
-stackable = true
 item_description = "This item does nothing."
 item_details = "Nothing to see here."
 item_scene = ExtResource("1_82n27")

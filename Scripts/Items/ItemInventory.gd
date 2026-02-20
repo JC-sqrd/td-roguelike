@@ -41,6 +41,7 @@ func add_item(item : Item) -> bool:
 				item_dict[item.item_id] = item
 				#Add it as child
 				add_child(item)
+				item.equip(entity)
 				return true
 			else:
 				#if we don't, we can't add it to the inventory
@@ -59,6 +60,7 @@ func add_item(item : Item) -> bool:
 				items_count[item.item_id] += 1
 				#Add it as child
 				add_child(item)
+				item.equip(entity)
 				return true
 		else:
 			#if we don't, do we have enough space for a new item
@@ -71,6 +73,7 @@ func add_item(item : Item) -> bool:
 				item_dict[item.item_id] = item
 				#Add it as child
 				add_child(item)
+				item.equip(entity)
 				return true
 		pass
 	return false

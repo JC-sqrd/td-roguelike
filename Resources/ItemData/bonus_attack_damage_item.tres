@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://cvjpk2ph7spbk"]
+
+[ext_resource type="Script" uid="uid://bugmanmdytnho" path="res://Scripts/Items/ItemData.gd" id="1_7lkmk"]
+[ext_resource type="PackedScene" uid="uid://ja1077kjuhas" path="res://Scenes/Items/item_add_attack_damage.tscn" id="1_bmpao"]
+
+[resource]
+script = ExtResource("1_7lkmk")
+item_name = "Bonus Damage"
+item_id = &"bonus_attack_damage"
+item_details = "+10 Attack Damage"
+item_scene = ExtResource("1_bmpao")
+metadata/_custom_type_script = "uid://bugmanmdytnho"

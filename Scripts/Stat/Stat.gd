@@ -42,8 +42,9 @@ func set_value(value : float):
 	value_changed.emit(self)
 	pass
 
-func add_modifier(stat_mofifier : StatModifier):
-	modifiers.append(stat_mofifier)
+func add_modifier(stat_modfifier : StatModifier, context : Dictionary[StringName, Variant]):
+	stat_modfifier.apply_modifier(self, context)
+	modifiers.append(stat_modfifier)
 
 func add_bonus_value(value : float):
 	
@@ -75,7 +76,8 @@ func add_multiplier(multiplier : float):
 	pass
 
 
-func remove_modifier(stat_modifier : StatModifier):
+func remove_modifier(stat_modifier : StatModifier, context : Dictionary[StringName, Variant]):
+	stat_modifier.remove_modifier(self, context)
 	modifiers.erase(stat_modifier)
 
 func get_value()-> float:

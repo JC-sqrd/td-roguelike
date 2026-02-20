@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://ja1077kjuhas"]
+
+[ext_resource type="Script" uid="uid://b3m6pe32p0sk1" path="res://Scripts/Items/Item.gd" id="1_k6bku"]
+[ext_resource type="Script" uid="uid://3td66rerkuq3" path="res://Scripts/Items/ItemEffects/add_attack_damage.gd" id="2_ytud8"]
+[ext_resource type="Script" uid="uid://bvlmo7eyi5nvi" path="res://Scripts/ContextTag/ContextTag.gd" id="3_gginm"]
+[ext_resource type="Script" uid="uid://yxewk2f711vu" path="res://Scripts/StatModifiers/Templates/FlatStatModifierTemplate.gd" id="4_ank5e"]
+[ext_resource type="Script" uid="uid://h5q0xghe0ry1" path="res://Scripts/StatModifiers/ValueProvider/BonusValue/BonusValue.gd" id="5_0dv7l"]
+[ext_resource type="Script" uid="uid://jew6vpdsqhvk" path="res://Scripts/StatModifiers/ValueProvider/Templates/FlatValueStatProvider.gd" id="6_degqd"]
+
+[sub_resource type="Resource" id="Resource_q542u"]
+script = ExtResource("6_degqd")
+value = 10.0
+metadata/_custom_type_script = "uid://jew6vpdsqhvk"
+
+[sub_resource type="Resource" id="Resource_eyx60"]
+script = ExtResource("4_ank5e")
+stat_id = &"attack_damage"
+value_provider_template = SubResource("Resource_q542u")
+metadata/_custom_type_script = "uid://yxewk2f711vu"
+
+[node name="ItemAddAttackDamage" type="Node" unique_id=1851737659 node_paths=PackedStringArray("item_effect")]
+script = ExtResource("1_k6bku")
+item_effect = NodePath("AddAttackDamageEffect")
+metadata/_custom_type_script = "uid://b3m6pe32p0sk1"
+
+[node name="AddAttackDamageEffect" type="Node" parent="." unique_id=812625594]
+script = ExtResource("2_ytud8")
+bonus_attack_damage = SubResource("Resource_eyx60")
+metadata/_custom_type_script = "uid://bsp6etyso24po"

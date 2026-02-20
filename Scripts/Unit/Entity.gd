@@ -65,3 +65,8 @@ func _on_health_depleted():
 func _exit_tree() -> void:
 	EffectServer.free_rid(entity_rid)
 	pass
+
+func get_entity_context() -> Dictionary[StringName, Variant]:
+	return {
+		"entity" : Entity
+	}

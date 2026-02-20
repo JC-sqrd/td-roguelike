@@ -7,8 +7,10 @@
 [ext_resource type="Script" uid="uid://l4vm1l78yxg2" path="res://Scripts/Items/ItemInventory.gd" id="3_nv68h"]
 [ext_resource type="Resource" uid="uid://dexogxuymtghv" path="res://Resources/ItemData/base_item.tres" id="4_1co6k"]
 [ext_resource type="Script" uid="uid://bj80inxdbmrak" path="res://Scripts/Attack/ProjectileAttack.gd" id="4_7oy58"]
+[ext_resource type="Script" uid="uid://bugmanmdytnho" path="res://Scripts/Items/ItemData.gd" id="4_usbpd"]
 [ext_resource type="Resource" uid="uid://u8qjlnk57elf" path="res://Resources/ProjectileTemplates/fast_projectile_template.tres" id="5_pouuo"]
 [ext_resource type="Script" uid="uid://rq6t2ktj4pbf" path="res://Scripts/Effect/Templates/EffectTemplate.gd" id="6_f8clx"]
+[ext_resource type="Resource" uid="uid://cvjpk2ph7spbk" path="res://Resources/ItemData/bonus_attack_damage_item.tres" id="6_j02f4"]
 [ext_resource type="Script" uid="uid://c58d5uuvecjfb" path="res://Scripts/StatMutators/Templates/FlatStatMutatorTemplate.gd" id="7_5gudw"]
 [ext_resource type="Script" uid="uid://bvlmo7eyi5nvi" path="res://Scripts/ContextTag/ContextTag.gd" id="8_2ices"]
 [ext_resource type="Script" uid="uid://h5q0xghe0ry1" path="res://Scripts/StatModifiers/ValueProvider/BonusValue/BonusValue.gd" id="9_w2p04"]
@@ -78,7 +80,7 @@ metadata/_custom_type_script = "uid://cgweddqijr87x"
 
 [node name="ItemInventory" type="Node" parent="Entity" unique_id=1120649686]
 script = ExtResource("3_nv68h")
-item_data = Array[Object]([ExtResource("4_1co6k"), ExtResource("4_1co6k"), ExtResource("4_1co6k"), ExtResource("4_1co6k")])
+item_data = Array[ExtResource("4_usbpd")]([ExtResource("4_1co6k"), ExtResource("6_j02f4")])
 metadata/_custom_type_script = "uid://l4vm1l78yxg2"
 
 [node name="Attack" type="Node" parent="Entity" unique_id=2138320614 node_paths=PackedStringArray("scanner", "spawn_position_node", "attack_timer")]
