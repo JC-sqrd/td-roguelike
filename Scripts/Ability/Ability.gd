@@ -17,7 +17,7 @@ var ability_context : Dictionary[StringName, Variant]
 
 @abstract func deactivate()
 
-@abstract func start_ability(stats : Stats, context : Dictionary[StringName,Variant])
+@abstract func start_ability(caster_stats : Stats, context : Dictionary[StringName,Variant])
 
 @abstract func end_ability()
 

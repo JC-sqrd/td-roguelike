@@ -18,6 +18,9 @@ var can_attack : bool = false
 var attacker : Entity
 var attack_stats : Stats
 
+signal attack_hit(entity : Entity)
+signal attack()
+
 func _ready():
 	pass
 
@@ -39,6 +42,9 @@ func _on_scanner_collision_exit():
 	pass
 
 func _on_attack_timer_timeout():
+	pass
+
+func _on_attack_hit(hit_rid : RID):
 	pass
 
 func start_attack():

@@ -6,6 +6,8 @@ var collisions : Array[RID]
 var effects : Array[Effect]
 var context : Dictionary
 
+signal melee_hit(hit : RID)
+
 func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 	area_exited.connect(_on_area_exited)
@@ -28,10 +30,12 @@ func hit_collisions(pierce : bool = true):
 		for collision in collisions:
 			for effect in effects:
 				EffectServer.receive_effect(collision, effect, context)
+			melee_hit.emit(collision)
 		pass
 	else:
 		for collision in collisions:
 			for effect in effects:
 				EffectServer.receive_effect(collision, effect, context)
+			melee_hit.emit(collision)
 			break
 	pass

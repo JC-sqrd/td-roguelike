@@ -20,8 +20,13 @@ signal died(unit : Entity)
 
 
 func initialize(entity_2d : Node2D, rid : RID):
+	
 	self.entity_2d = entity_2d
 	self.entity_rid = rid
+	
+	#Register entity to entity server
+	EntityServer.register_entity(entity_rid, self)
+	
 	stats.initialize()
 	
 	context = {"stats" : stats, "actor" : self}
@@ -64,6 +69,7 @@ func _on_health_depleted():
 
 func _exit_tree() -> void:
 	EffectServer.free_rid(entity_rid)
+	EntityServer.free_entity(entity_rid)
 	pass
 
 func get_entity_context() -> Dictionary[StringName, Variant]:

@@ -22,7 +22,9 @@
 [ext_resource type="PackedScene" uid="uid://7j7s6lagitrr" path="res://Scenes/Abilities/ability_power_shot.tscn" id="17_bm62s"]
 [ext_resource type="Script" uid="uid://wrvmnol78qg7" path="res://Scripts/Ability/AbilityController.gd" id="17_bod52"]
 [ext_resource type="Script" uid="uid://crvj02bgldlcg" path="res://Scripts/Movement/UnitMovement.gd" id="19_2mcow"]
+[ext_resource type="Script" uid="uid://tjwbavxemevr" path="res://Scripts/Ability/AbilityChargeMode/ActiveAbilityChargeMode.gd" id="20_7oy58"]
 [ext_resource type="Script" uid="uid://b3i4782jqf5hj" path="res://Scripts/StatModifiers/ValueProvider/Templates/ContextStatsValueProviderTemplate.gd" id="21_1co6k"]
+[ext_resource type="Script" uid="uid://b2r2v7ehbbvr7" path="res://Scripts/Ability/AbilityChargeMode/ChargeOnAttackHit.gd" id="21_pouuo"]
 
 [sub_resource type="Resource" id="Resource_nv68h"]
 script = ExtResource("21_1co6k")
@@ -56,6 +58,10 @@ name = "Attack Damage"
 stat_id = &"attack_damage"
 value = 20.0
 metadata/_custom_type_script = "uid://cbxu2cfwgpjwg"
+
+[sub_resource type="Resource" id="Resource_pouuo"]
+script = ExtResource("21_pouuo")
+metadata/_custom_type_script = "uid://b2r2v7ehbbvr7"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_58nij"]
 size = Vector2(128, 128)
@@ -105,8 +111,15 @@ metadata/_custom_type_script = "uid://bwluoofyu0fhe"
 script = ExtResource("17_bod52")
 ability = NodePath("AbilityPowerShot")
 
-[node name="AbilityPowerShot" parent="Entity/AbilityController" unique_id=1103324863 node_paths=PackedStringArray("spawn_position") instance=ExtResource("17_bm62s")]
+[node name="AbilityPowerShot" parent="Entity/AbilityController" unique_id=1103324863 node_paths=PackedStringArray("spawn_position", "charge_mode") instance=ExtResource("17_bm62s")]
 spawn_position = NodePath("../../../AttackPos")
+pierce = 2
+charge_mode = NodePath("AbilityChargeMode")
+
+[node name="AbilityChargeMode" type="Node" parent="Entity/AbilityController/AbilityPowerShot" unique_id=1066527709]
+script = ExtResource("20_7oy58")
+mode = SubResource("Resource_pouuo")
+metadata/_custom_type_script = "uid://tjwbavxemevr"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=43116825]
 position = Vector2(0, -64)

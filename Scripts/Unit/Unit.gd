@@ -10,8 +10,6 @@ func _ready() -> void:
 	
 	entity.health_manager.health_depleted.connect(_on_health_depleted)
 	
-	EntityServer.register_entity(self, entity)
-	
 	unit_movement.initialize(self)
 	pass
 

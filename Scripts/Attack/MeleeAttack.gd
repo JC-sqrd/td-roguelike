@@ -32,7 +32,8 @@ func _ready() -> void:
 func initialize(actor : Entity):
 	super(actor)
 	melee.effects = self.effects
-
+	
+	melee.melee_hit.connect(_on_attack_hit)
 	pass
 
 func start_attack():
@@ -62,6 +63,10 @@ func _on_melee_area_exited(area : Area2D):
 func _on_attack_timer_timeout():
 	attack_timer.stop()
 	start_attack()
+	pass
+
+func _on_attack_hit(hit_rid : RID):
+	attack_hit.emit(EntityServer.get_entity(hit_rid))
 	pass
 
 func melee_callback():

@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://wrvmnol78qg7" path="res://Scripts/Ability/AbilityController.gd" id="15_gqnp8"]
 [ext_resource type="Script" uid="uid://cj4mrt1ckacof" path="res://Scripts/Ability/ActiveAbility.gd" id="16_bkvpy"]
 [ext_resource type="Script" uid="uid://l4vm1l78yxg2" path="res://Scripts/Items/ItemInventory.gd" id="16_dfsfn"]
+[ext_resource type="Script" uid="uid://tjwbavxemevr" path="res://Scripts/Ability/AbilityChargeMode/ActiveAbilityChargeMode.gd" id="17_s0bs6"]
 [ext_resource type="Script" uid="uid://ett7q7dk3f8l" path="res://Scripts/Effect/Templates/InstantEffectTemplate.gd" id="17_u5qbr"]
 [ext_resource type="Script" uid="uid://crvj02bgldlcg" path="res://Scripts/Movement/UnitMovement.gd" id="18_rutio"]
 
@@ -65,7 +66,7 @@ monitoring = false
 script = ExtResource("1_bkvpy")
 entity = NodePath("Entity")
 unit_movement = NodePath("UnitMovement")
-unit_size_offsets = Array[Vector2]([Vector2(1, 0)])
+unit_size_offsets = Array[Vector2i]([Vector2i(1, 0)])
 
 [node name="Entity" type="Node" parent="." unique_id=2062278789 node_paths=PackedStringArray("stats", "unit_sprite", "attack", "ability_controller", "item_inventory")]
 script = ExtResource("1_ofjnw")
@@ -105,9 +106,14 @@ script = ExtResource("15_gqnp8")
 ability = NodePath("ActiveAbility")
 metadata/_custom_type_script = "uid://wrvmnol78qg7"
 
-[node name="ActiveAbility" type="Node" parent="Entity/AbilityController" unique_id=316062809]
+[node name="ActiveAbility" type="Node" parent="Entity/AbilityController" unique_id=316062809 node_paths=PackedStringArray("charge_mode")]
 script = ExtResource("16_bkvpy")
+charge_mode = NodePath("ActiveAbilityChargeMode")
 metadata/_custom_type_script = "uid://cj4mrt1ckacof"
+
+[node name="ActiveAbilityChargeMode" type="Node" parent="Entity/AbilityController/ActiveAbility" unique_id=852620585]
+script = ExtResource("17_s0bs6")
+metadata/_custom_type_script = "uid://tjwbavxemevr"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=400991827]
 position = Vector2(0, -64)

@@ -11,6 +11,7 @@
 [ext_resource type="Resource" uid="uid://cotnxkja5h153" path="res://Resources/UnitStatsTemplates/stats_test_enemy.tres" id="7_wky3c"]
 [ext_resource type="Script" uid="uid://wrvmnol78qg7" path="res://Scripts/Ability/AbilityController.gd" id="8_2ptut"]
 [ext_resource type="Script" uid="uid://cj4mrt1ckacof" path="res://Scripts/Ability/ActiveAbility.gd" id="9_ps6dr"]
+[ext_resource type="Script" uid="uid://tjwbavxemevr" path="res://Scripts/Ability/AbilityChargeMode/ActiveAbilityChargeMode.gd" id="11_ryarw"]
 
 [sub_resource type="Resource" id="Resource_b0whd"]
 script = ExtResource("4_ryarw")
@@ -71,9 +72,14 @@ script = ExtResource("8_2ptut")
 ability = NodePath("ActiveAbility")
 metadata/_custom_type_script = "uid://wrvmnol78qg7"
 
-[node name="ActiveAbility" type="Node" parent="Entity/AbilityController" unique_id=2008379666]
+[node name="ActiveAbility" type="Node" parent="Entity/AbilityController" unique_id=2008379666 node_paths=PackedStringArray("charge_mode")]
 script = ExtResource("9_ps6dr")
+charge_mode = NodePath("ActiveAbilityChargeMode")
 metadata/_custom_type_script = "uid://cj4mrt1ckacof"
+
+[node name="ActiveAbilityChargeMode" type="Node" parent="Entity/AbilityController/ActiveAbility" unique_id=356763330]
+script = ExtResource("11_ryarw")
+metadata/_custom_type_script = "uid://tjwbavxemevr"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=628924977]
 position = Vector2(0, -64)

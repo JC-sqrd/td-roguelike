@@ -20,6 +20,8 @@ var effects : Array[Effect]
 
 var hits : Array[RID]
 
+signal projectile_hit(hit : Entity)
+
 func _init(body : RID, shape : RID,canvas_item_rid : RID, parent_canvas_item : CanvasItem, texture : Texture2D,position : Vector2, speed : float = 0):
 	self.body = body
 	self.canvas_item_rid = canvas_item_rid
@@ -147,13 +149,15 @@ func simulate_projectile(delta : float, callback_func : Callable):
 			EffectServer.receive_effect(area_rid, effect, context)
 		
 		
-		
 		if pierce_count <= 0:
 			callback_func.call(self)
 			destroy_projectile()
+		
 		hits.append(area_rid)
 		
 		pierce_count -= 1
+		
+		projectile_hit.emit(area_rid)
 		
 	if add_lifetime_counter(delta):
 		callback_func.call(self)

@@ -26,7 +26,15 @@ func _init(stat_id : StringName, stat_value : float, name : String = "Stat",bonu
 	pass
 
 func add(value : float):
+	#Reset value
+	self.value = (self.value / multiplier) - self.bonus_value
+	
+	#Add value
 	self.value += value
+	
+	#Recalculate derived value
+	self.value = (self.value + self.bonus_value) * multiplier
+	
 	value_changed.emit(self)
 	pass
 
